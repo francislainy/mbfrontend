@@ -11,16 +11,25 @@ export default () => {
         {
             title: "a",
             items: {
-                results: [
+                movies: [
                     {
-                        poster_path: "any",
-                        pinyin: "xī",
+                        actor: {
+                            id: "1bfff94a-b70e-4b39-bd2a-be1c0f898589",
+                            name: "Shakira"
+                        },
                         character: "西",
-                        location: "Childhood home",
-                        actor: "Shakira",
-                        room: "Bedroom",
                         meaning: "West",
-                        scene: "Kanye West talking to Shakira outside the front entrance"
+                        pinyin: "xī",
+                        imageUrl: "anyUrl",
+                        room: {
+                            id: "1bfff94a-b70e-4b39-bd2a-be1c0f898589",
+                            title: "Bedroom"
+                        },
+                        scene: "Kanye West talking to Shakira outside the front entrance",
+                        setLocation: {
+                            id: "1bfff94a-b70e-4b39-bd2a-be1c0f898589",
+                            title: "Childhood home"
+                        }
                     }
                 ]
             }
@@ -31,7 +40,7 @@ export default () => {
         const loadAll = async () => {
             let list = await Tmdb.getHomeList();
             console.log(list)
-            setMovieList(sampleList)
+            setMovieList(list)
         }
 
         loadAll();
@@ -40,9 +49,6 @@ export default () => {
     return (
         <div className="page">
             Header
-            Destaque
-            As listas
-            Rodape
             <section className="lists">
                 {movieList.map((item, key) => (
                     <MovieRow key={key} title={item.title} items={item.items}/>
