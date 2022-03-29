@@ -2,8 +2,10 @@ import React, {useEffect, useState} from 'react';
 import './App.css'
 import Tmdb from './Tmdb'
 import MovieRow from "./components/MovieRow";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
 
-export default () => {
+const App = () => {
 
     const [movieList, setMovieList] = useState([])
 
@@ -26,7 +28,7 @@ export default () => {
                             title: "Bedroom"
                         },
                         scene: "Kanye West talking to Shakira outside the front entrance",
-                        setLocation: {
+                        location: {
                             id: "1bfff94a-b70e-4b39-bd2a-be1c0f898589",
                             title: "Childhood home"
                         }
@@ -48,7 +50,27 @@ export default () => {
 
     return (
         <div className="page">
-            Header
+            <nav className="navbar navbar-light navbar-expand-lg navigation-clean">
+                <div className="container">
+                    <a className="navbar-brand" href="#">Mandarim Movies</a>
+                    <div id="navcol-2" className="collapse navbar-collapse">
+                        <ul className="navbar-nav ms-auto">
+                            <li className="nav-item">
+                                <a className="nav-link active">My Movies</a>
+                            </li>
+                            <li className="nav-item">
+                                <a className="nav-link">Actors</a>
+                            </li>
+                            <li className="nav-item">
+                                <a className="nav-link">Locations</a>
+                            </li>
+                            <li className="nav-item">
+                                <a className="nav-link">Rooms</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
             <section className="lists">
                 {movieList.map((item, key) => (
                     <MovieRow key={key} title={item.title} items={item.items}/>
@@ -57,3 +79,5 @@ export default () => {
         </div>
     )
 }
+
+export default App;

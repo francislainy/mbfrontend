@@ -1,4 +1,4 @@
-const API_BASE = 'http://localhost:8080';
+const API_BASE = 'http://localhost:8081';
 
 const basicFetch = async (endpoint) => {
     const req = await fetch(`${API_BASE}${endpoint}`)
@@ -9,7 +9,7 @@ export default {
     getHomeList: async () => {
         return [
             {
-                title: 'Originais do Netflix',
+                title: 'My Movies',
                 items: await basicFetch(`/api/mb/movie`)
             },
         ]
