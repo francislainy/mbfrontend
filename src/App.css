@@ -39,6 +39,10 @@ body {
     border-color: #f5b615 !important;
 }
 
+.submit-button {
+    color: white !important;
+}
+
 .button-container {
     padding-top: 16px;
     text-align: end;
@@ -51,3 +55,5 @@ body {
 button:hover, button:focus {
     outline: none;
 }
+
+
