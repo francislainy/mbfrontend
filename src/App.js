@@ -4,6 +4,7 @@ import Tmdb from './Tmdb'
 import MovieRow from "./components/MovieRow";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
+import {Button} from "react-bootstrap";
 
 const App = () => {
 
@@ -71,11 +72,17 @@ const App = () => {
                     </div>
                 </div>
             </nav>
-            <section className="lists">
-                {movieList.map((item, key) => (
-                    <MovieRow key={key} title={item.title} items={item.items}/>
-                ))}
-            </section>
+
+            <div className="container">
+                <div className="button-container">
+                    <Button className="new-movie-button shadow-none">New Movie</Button>
+                </div>
+                <section className="lists">
+                    {movieList.map((item, key) => (
+                        <MovieRow key={key} title={item.title} items={item.items}/>
+                    ))}
+                </section>
+            </div>
         </div>
     )
 }

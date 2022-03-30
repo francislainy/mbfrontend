@@ -29,3 +29,25 @@ body {
     border: none;
     margin-bottom: 0;
 }
+
+.navbar-light .navbar-brand {
+    color: #f8f9fa !important;
+}
+
+.new-movie-button {
+    background-color: #f5b615 !important;
+    border-color: #f5b615 !important;
+}
+
+.button-container {
+    padding-top: 16px;
+    text-align: end;
+}
+
+.container {
+    /*margin: 8px;*/
+}
+
+button:hover, button:focus {
+    outline: none;
+}

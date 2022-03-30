@@ -4,7 +4,7 @@ import './MovieRow.css';
 const MovieRow = ({title, items}) => {
     return (
         <div>
-            <h2>{title}</h2>
+            <h2 className="text-warning">{title}</h2>
             {/*<h2>{items.movies.length}</h2>*/}
             <div className="movieRow--listarea">
                 <table className="table table-bordered table-dark">
