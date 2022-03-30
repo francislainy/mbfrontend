@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import './App.css'
-import Tmdb from './Tmdb'
 import {getMovies} from "./api"
 import MovieRow from "./components/MovieRow";
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -9,11 +8,8 @@ import {Button} from "react-bootstrap";
 
 const App = () => {
 
-    // const [movieList, setMovieList] = useState([])
-    const [data, setData] = useState(null)
     const [show, setShow] = useState(false)
 
-    // const sampleList = [
     const [movieList, setMovieList] = useState({
             movies: [
                 {
