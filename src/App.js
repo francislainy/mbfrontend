@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import './App.css'
 import Tmdb from './Tmdb'
+import {getMovies} from "./api"
 import MovieRow from "./components/MovieRow";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
@@ -8,53 +9,54 @@ import {Button} from "react-bootstrap";
 
 const App = () => {
 
-    const [movieList, setMovieList] = useState([])
+    // const [movieList, setMovieList] = useState([])
     const [data, setData] = useState(null)
     const [show, setShow] = useState(false)
 
-    const sampleList = [
-        {
-            title: "a",
-            items: {
-                movies: [
-                    {
-                        actor: {
-                            id: "1bfff94a-b70e-4b39-bd2a-be1c0f898589",
-                            name: "Shakira"
-                        },
-                        character: "西",
-                        meaning: "West",
-                        pinyin: "xī",
-                        imageUrl: "anyUrl",
-                        room: {
-                            id: "1bfff94a-b70e-4b39-bd2a-be1c0f898589",
-                            title: "Bedroom"
-                        },
-                        scene: "Kanye West talking to Shakira outside the front entrance",
-                        location: {
-                            id: "1bfff94a-b70e-4b39-bd2a-be1c0f898589",
-                            title: "Childhood home"
-                        }
+    // const sampleList = [
+    const [movieList, setMovieList] = useState({
+            movies: [
+                {
+                    actor: {
+                        id: "1bfff94a-b70e-4b39-bd2a-be1c0f898589",
+                        name: "Shakira"
+                    },
+                    character: {
+                        hanzi: "西",
+                        pinyin: "xi",
+                        meaning: "West"
+                    },
+                    room: {
+                        id: "1bfff94a-b70e-4b39-bd2a-be1c0f898589",
+                        title: "Bedroom"
+                    },
+                    scene: "Kanye West talking to Shakira outside the front entrance",
+                    imageUrl: "anyUrl",
+                    location: {
+                        id: "1bfff94a-b70e-4b39-bd2a-be1c0f898589",
+                        title: "Childhood home"
                     }
-                ]
-            }
+                }
+            ]
         }
-    ]
+    )
 
     useEffect(() => {
         const loadAll = async () => {
-            let list = await Tmdb.getHomeList();
-            console.log(list)
-            setMovieList(list)
+            try {
+                getMovies().then(response => setMovieList(response.data))
+            } catch (e) {
+                console.log(e + "error")
+            }
         }
 
-        loadAll();
+        loadAll().then(r => console.log(r));
     }, []);
 
-    function getData(event) {
-        setData(event.target.value)
-        console.log(event.target.value)
-    }
+    // function getData(event) {
+    //     setData(event.target.value)
+    //     console.log(event.target.value)
+    // }
 
     function handleSubmit(e) {
         e.preventDefault()
@@ -92,39 +94,32 @@ const App = () => {
                     </div>
                 </div>
             </nav>
-
             <div className="container">
                 <div className="button-container">
                     <Button className="new-movie-button shadow-none" onClick={() => setShow(true)}>New Movie</Button>
                 </div>
                 {
-                    // show? <input type={"text"} onChange={getData}/> : null
                     show ? <section style={{paddingBottom: '16px'}}>
                         <form method="post" onSubmit={handleSubmit}>
                             <h2>Create new movie</h2>
                             <div className="mb-2">
-                                <input className="form-control" type="text" name="character" placeholder="Character"
-                                       onChange={getData}/>
+                                <input className="form-control" type="text" name="character" placeholder="Character"/>
                             </div>
                             <div className="mb-2">
-                                <input className="form-control" type="text" name="pinyin" placeholder="Pinyin"
-                                       onChange={getData}/>
+                                <input className="form-control" type="text" name="pinyin" placeholder="Pinyin"/>
                             </div>
                             <div className="mb-2">
-                                <input className="form-control" type="text" name="actor" placeholder="Actor"
-                                       onChange={getData}/>
+                                <input className="form-control" type="text" name="actor" placeholder="Actor"/>
                             </div>
                             <div className="mb-2">
-                                <input className="form-control" type="text" name="location" placeholder="Location"
-                                       onChange={getData}/>
+                                <input className="form-control" type="text" name="location" placeholder="Location"/>
                             </div>
                             <div className="mb-2">
-                                <input className="form-control" type="text" name="room" placeholder="Room"
-                                       onChange={getData}/>
+                                <input className="form-control" type="text" name="room" placeholder="Room"/>
                             </div>
                             <div className="mb-2">
-                                <textarea className="form-control" name="scene" placeholder="Scene" rows="14"
-                                          onChange={getData}></textarea>
+                                <textarea className="form-control" name="scene" placeholder="Scene"
+                                          rows="14"></textarea>
                             </div>
                             <div>
                                 <button className="btn btn-warning submit-button" type="submit">Send</button>
@@ -133,9 +128,7 @@ const App = () => {
                     </section> : null
                 }
                 <section className="lists">
-                    {movieList.map((item, key) => (
-                        <MovieRow key={key} title={item.title} items={item.items}/>
-                    ))}
+                    <MovieRow movies={movieList.movies}/>
                 </section>
             </div>
         </div>

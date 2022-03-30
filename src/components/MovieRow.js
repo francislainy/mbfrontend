@@ -1,11 +1,9 @@
 import React from 'react';
 import './MovieRow.css';
 
-const MovieRow = ({title, items}) => {
+const MovieRow = ({movies}) => {
     return (
         <div>
-            <h2 className="text-warning">{title}</h2>
-            {/*<h2>{items.movies.length}</h2>*/}
             <div className="movieRow--listarea">
                 <table className="table table-bordered table-dark">
                     <thead>
@@ -17,7 +15,7 @@ const MovieRow = ({title, items}) => {
                     <th>Scene</th>
                     <th>Image Url</th>
                     </thead>
-                    {items.movies.length > 0 && items.movies.map((item, key) => (
+                    {movies.length > 0 && movies.map((item, key) => (
                         <tbody className="table-light">
                         <tr>
                             <td>{`${item.character.pinyin}`}</td>

@@ -37,6 +37,7 @@ body {
 .new-movie-button {
     background-color: #f5b615 !important;
     border-color: #f5b615 !important;
+    margin-bottom: 16px;
 }
 
 .submit-button {
