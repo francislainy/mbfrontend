@@ -1,16 +1,16 @@
 import React, {useEffect, useState} from 'react';
 import './App.css'
-import {getMovies, createMovie} from "./api"
+import {createMovie, getMovies} from "./api"
 import MovieRow from "./components/MovieRow";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-import {Button} from "react-bootstrap";
+import {Button, Dropdown, DropdownButton} from "react-bootstrap";
 
 const App = () => {
 
     const [showForm, setShowForm] = useState(false)
     const [showSuccessAlert, setShowSuccessAlert] = useState(false)
-
+    const [selectedActorId, selectActorId] = useState();
     const [movieList, setMovieList] = useState({
             movies: [
                 {
@@ -47,7 +47,7 @@ const App = () => {
         }
 
         loadAll().then(r => console.log(r));
-    }, [movieList]);
+    }, [showForm]);
 
     useEffect(() => { //todo: timeout not closing popup. It works when small number (30)
         const timeId = setTimeout(() => {
@@ -58,11 +58,11 @@ const App = () => {
         return () => {
             clearTimeout(timeId)
         }
-    }, [movieList]);
+    }, [showForm]);
 
     function handleSubmit(e) {
         e.preventDefault()
-        const {character, pinyin, meaning, actor, location, room, scene} = e.target
+        const {character, pinyin, meaning, location, room, scene} = e.target
         let values = {
             character: {
                 hanzi: character.value,
@@ -70,7 +70,7 @@ const App = () => {
                 meaning: meaning.value,
             },
             actor: {
-                id: actor.value,
+                id: selectedActorId,
             },
             location: {
                 id: location.value,
@@ -99,6 +99,21 @@ const App = () => {
             </span>
         </div>;
     }
+
+    const actors = [
+        {
+            id: 'aec56250-fe0b-404b-8054-b1964654d0e3',
+            name: "David Beckham"
+        },
+        {
+            id: '8c5874be-93aa-4bc1-ae72-a74bc7933095',
+            name: "Fidel Castro"
+        },
+        {
+            id: '4efff94a-b70e-4b39-bd2a-be1c0f898589',
+            name: "Shakira"
+        }
+    ]
 
     return (
         <div className="page">
@@ -147,7 +162,25 @@ const App = () => {
                                 <input className="form-control" type="text" name="meaning" placeholder="Meaning"/>
                             </div>
                             <div className="mb-2">
-                                <input className="form-control" type="text" name="actor" placeholder="Actor"/>
+                                <DropdownButton
+                                    title={
+                                        selectedActorId
+                                            ? actors.find((actor) => actor.id === selectedActorId).name
+                                            : "Select actor"
+                                    }
+                                    onSelect={(eventKey) => selectActorId(eventKey)}
+                                >
+                                    {actors.map((actor, index) => {
+                                        return (
+                                            <Dropdown.Item
+                                                key={index}
+                                                eventKey={actor.id}
+                                                active={actor.id === selectedActorId}>
+                                                {actor.name}
+                                            </Dropdown.Item>
+                                        );
+                                    })}
+                                </DropdownButton>
                             </div>
                             <div className="mb-2">
                                 <input className="form-control" type="text" name="location" placeholder="Location"/>
