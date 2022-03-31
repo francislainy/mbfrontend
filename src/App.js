@@ -11,31 +11,32 @@ const App = () => {
     const [showForm, setShowForm] = useState(false)
     const [showSuccessAlert, setShowSuccessAlert] = useState(false)
     const [selectedActorId, selectActorId] = useState();
+    const [selectedLocationId, selectLocationId] = useState();
+    const [selectedRoomId, selectRoomId] = useState();
     const [movieList, setMovieList] = useState({
-            movies: [
-                {
-                    actor: {
-                        id: "1bfff94a-b70e-4b39-bd2a-be1c0f898589",
-                    },
-                    character: {
-                        hanzi: "西",
-                        pinyin: "xi",
-                        meaning: "West"
-                    },
-                    room: {
-                        id: "1bfff94a-b70e-4b39-bd2a-be1c0f898589",
-                        title: "Bedroom"
-                    },
-                    scene: "Kanye West talking to Shakira outside the front entrance",
-                    imageUrl: "anyUrl",
-                    location: {
-                        id: "1bfff94a-b70e-4b39-bd2a-be1c0f898589",
-                        title: "Childhood home"
-                    }
+        movies: [
+            {
+                actor: {
+                    id: "1bfff94a-b70e-4b39-bd2a-be1c0f898589",
+                },
+                character: {
+                    hanzi: "西",
+                    pinyin: "xi",
+                    meaning: "West"
+                },
+                room: {
+                    id: "1bfff94a-b70e-4b39-bd2a-be1c0f898589",
+                    title: "Bedroom"
+                },
+                scene: "Kanye West talking to Shakira outside the front entrance",
+                imageUrl: "anyUrl",
+                location: {
+                    id: "1bfff94a-b70e-4b39-bd2a-be1c0f898589",
+                    title: "Childhood home"
                 }
-            ]
-        }
-    )
+            }
+        ]
+    })
 
     useEffect(() => {
         const loadAll = async () => {
@@ -62,7 +63,7 @@ const App = () => {
 
     function handleSubmit(e) {
         e.preventDefault()
-        const {character, pinyin, meaning, location, room, scene} = e.target
+        const {character, pinyin, meaning, scene} = e.target
         let values = {
             character: {
                 hanzi: character.value,
@@ -73,10 +74,10 @@ const App = () => {
                 id: selectedActorId,
             },
             location: {
-                id: location.value,
+                id: selectedLocationId,
             },
             room: {
-                id: room.value,
+                id: selectedRoomId,
             },
             scene: scene.value,
         }
@@ -112,6 +113,36 @@ const App = () => {
         {
             id: '4efff94a-b70e-4b39-bd2a-be1c0f898589',
             name: "Shakira"
+        }
+    ]
+
+    const locations = [
+        {
+            id: '1bfff94a-b70e-4b39-bd2a-be1c0f898589',
+            title: "South London"
+        },
+        {
+            id: '8c5874be-93aa-4bc1-ae72-a74bc7933095',
+            title: "Childhood home"
+        },
+        {
+            id: '95886ee0-c124-4576-be01-076dda7054d7',
+            title: "Hospital"
+        }
+    ]
+
+    const rooms = [
+        {
+            id: '1bfff94a-b70e-4b39-bd2a-be1c0f898589',
+            title: "Bedroom"
+        },
+        {
+            id: '452ae5f1-4641-4a27-afdc-75e6fffbc6dc',
+            title: "Kitchen"
+        },
+        {
+            id: 'c90087b8-b53b-4b65-9851-0c280d04479d',
+            title: "Outside"
         }
     ]
 
@@ -168,8 +199,7 @@ const App = () => {
                                             ? actors.find((actor) => actor.id === selectedActorId).name
                                             : "Select actor"
                                     }
-                                    onSelect={(eventKey) => selectActorId(eventKey)}
-                                >
+                                    onSelect={(eventKey) => selectActorId(eventKey)}>
                                     {actors.map((actor, index) => {
                                         return (
                                             <Dropdown.Item
@@ -183,10 +213,44 @@ const App = () => {
                                 </DropdownButton>
                             </div>
                             <div className="mb-2">
-                                <input className="form-control" type="text" name="location" placeholder="Location"/>
+                                <DropdownButton
+                                    title={
+                                        selectedLocationId
+                                            ? locations.find((location) => location.id === selectedLocationId).title
+                                            : "Select location"
+                                    }
+                                    onSelect={(eventKey) => selectLocationId(eventKey)}>
+                                    {locations.map((location, index) => {
+                                        return (
+                                            <Dropdown.Item
+                                                key={index}
+                                                eventKey={location.id}
+                                                active={location.id === selectedLocationId}>
+                                                {location.title}
+                                            </Dropdown.Item>
+                                        );
+                                    })}
+                                </DropdownButton>
                             </div>
                             <div className="mb-2">
-                                <input className="form-control" type="text" name="room" placeholder="Room"/>
+                                <DropdownButton
+                                    title={
+                                        selectedRoomId
+                                            ? rooms.find((room) => room.id === selectedRoomId).title
+                                            : "Select room"
+                                    }
+                                    onSelect={(eventKey) => selectRoomId(eventKey)}>
+                                    {rooms.map((room, index) => {
+                                        return (
+                                            <Dropdown.Item
+                                                key={index}
+                                                eventKey={room.id}
+                                                active={room.id === selectedRoomId}>
+                                                {room.title}
+                                            </Dropdown.Item>
+                                        );
+                                    })}
+                                </DropdownButton>
                             </div>
                             <div className="mb-2">
                                 <textarea className="form-control" name="scene" placeholder="Scene"
