@@ -49,8 +49,8 @@ body {
     text-align: end;
 }
 
-.container {
-    /*margin: 8px;*/
+.close-form-container {
+    text-align: end;
 }
 
 button:hover, button:focus {

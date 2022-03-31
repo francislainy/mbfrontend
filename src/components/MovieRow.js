@@ -9,9 +9,10 @@ const MovieRow = ({movies}) => {
                     <thead>
                     <th>Pinyin</th>
                     <th>Character</th>
-                    <th>Location</th>
-                    <th>Actor</th>
                     <th>Meaning</th>
+                    <th>Actor</th>
+                    <th>Location</th>
+                    <th>Room</th>
                     <th>Scene</th>
                     <th>Image Url</th>
                     </thead>
@@ -20,9 +21,10 @@ const MovieRow = ({movies}) => {
                         <tr>
                             <td>{`${item.character.pinyin}`}</td>
                             <td>{`${item.character.hanzi}`}</td>
-                            <td>{`${item.location.title}`}</td>
-                            <td>{`${item.actor.name}`}</td>
                             <td>{`${item.character.meaning}`}</td>
+                            <td>{`${item.actor.name}`}</td>
+                            <td>{`${item.location.title}`}</td>
+                            <td>{`${item.room.title}`}</td>
                             <td>{`${item.scene}`}</td>
                             <td>{`${item.imageUrl}`}</td>
                         </tr>
