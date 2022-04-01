@@ -158,6 +158,7 @@ const App = () => {
             .then((response) => {
                 setShowSuccessAlert(true)
                 setShowForm(false)
+                setShowNewMovieButton(true)
             })
     }
 
@@ -234,25 +235,26 @@ const App = () => {
                                 <div className="row">
                                     <div className="mb-2 col-4">
                                         <DropdownCreateMovie
-                                            actors={actorList.actors}
-                                            selectActorId={selectActorId}
-                                            selectedActorId={selectedActorId}
+                                            title="actor"
+                                            list={actorList.actors}
+                                            selectId={selectActorId}
+                                            selectedId={selectedActorId}
                                         />
                                     </div>
                                     <div className="mb-2 col-4">
                                         <DropdownCreateMovieUsePropertyTitle
                                             title="location"
                                             list={locationList.locations}
-                                            selectActorId={selectLocationId}
-                                            selectedActorId={selectedLocationId}
+                                            selectId={selectLocationId}
+                                            selectedId={selectedLocationId}
                                         />
                                     </div>
                                     <div className="mb-2 col-4">
                                         <DropdownCreateMovieUsePropertyTitle
                                             title="room"
                                             list={roomList.rooms}
-                                            selectActorId={selectRoomId}
-                                            selectedActorId={selectedRoomId}
+                                            selectId={selectRoomId}
+                                            selectedId={selectedRoomId}
                                         />
                                     </div>
                                 </div>

@@ -2,23 +2,23 @@ import React from 'react';
 import './MovieRow.css';
 import {Dropdown, DropdownButton} from "react-bootstrap";
 
-const DropdownCreateMovie = ({actors, selectedActorId, selectActorId}) => {
+const DropdownCreateMovie = ({list, selectedId, selectId, title}) => {
     return (
         <div>
             <DropdownButton variant="success"
                             title={
-                                selectedActorId
-                                    ? actors.find((actor) => actor.id === selectedActorId).name
-                                    : "Select Actor"
+                                selectedId
+                                    ? list.find((item) => item.id === selectedId).name
+                                    : `Select ${title}`
                             }
-                            onSelect={(eventKey) => selectActorId(eventKey)}>
-                {actors.map((actor, index) => {
+                            onSelect={(eventKey) => selectId(eventKey)}>
+                {list.map((item, index) => {
                     return (
                         <Dropdown.Item
                             key={index}
-                            eventKey={actor.id}
-                            active={actor.id === selectedActorId}>
-                            {actor.name}
+                            eventKey={item.id}
+                            active={item.id === selectedId}>
+                            {item.name}
                         </Dropdown.Item>
                     );
                 })}
