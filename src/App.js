@@ -7,7 +7,6 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 import {Button, Dropdown, DropdownButton} from "react-bootstrap";
 
 const App = () => {
-
     const [showForm, setShowForm] = useState(false)
     const [showNewMovieButton, setShowNewMovieButton] = useState(true)
     const [showSuccessAlert, setShowSuccessAlert] = useState(false)
@@ -66,7 +65,7 @@ const App = () => {
         ]
     })
 
-    useEffect(() => { //todo: timeout not closing popup. It works when small number (30)
+    useEffect(() => {
             const timeId = setTimeout(() => {
                 // After 3 seconds set the show value to false
                 setShowSuccessAlert(false)

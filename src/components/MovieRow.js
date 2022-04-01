@@ -1,9 +1,52 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import './MovieRow.css';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faTrashCan} from '@fortawesome/free-solid-svg-icons'
+import {deleteMovie} from "../api";
 
 const MovieRow = ({movies}) => {
+    const [showSuccessAlert, setShowSuccessAlert] = useState(false)
+
+    useEffect(() => {
+            const timeId = setTimeout(() => {
+                // After 3 seconds set the show value to false
+                // setShowSuccessAlert(false)
+            }, 3000)
+
+            return () => {
+                clearTimeout(timeId)
+            }
+        }
+        ,
+        []
+    );
+
+    const handleDelete = (id) => {
+        alert(id)
+
+        const axiosParams = {
+            id: id
+        }
+
+        deleteMovie(axiosParams)
+            .then((response) => {
+                // setShowSuccessAlert(true)
+                // setShowForm(false)
+                setShowSuccessAlert(true)
+            })
+    }
+
+    function getAlert() {
+        return <div className="alert alert-success" role="alert">
+            <span>
+                <strong>Movie deleted successfully</strong>
+            </span>
+        </div>;
+    }
+
     return (
         <div>
+            {showSuccessAlert ? getAlert() : null}
             <div className="movieRow--listarea">
                 <table className="table table-bordered table-dark">
                     <thead>
@@ -15,18 +58,20 @@ const MovieRow = ({movies}) => {
                     <th>Room</th>
                     <th>Scene</th>
                     <th>Image Url</th>
+                    <th>Delete Movie</th>
                     </thead>
-                    {movies.length > 0 && movies.map((item, key) => (
+                    {movies.length > 0 && movies.map((movie, key) => (
                         <tbody className="table-light">
                         <tr>
-                            <td>{`${item.character.pinyin}`}</td>
-                            <td>{`${item.character.hanzi}`}</td>
-                            <td>{`${item.character.meaning}`}</td>
-                            <td>{`${item.actor.name}`}</td>
-                            <td>{`${item.location.title}`}</td>
-                            <td>{`${item.room.title}`}</td>
-                            <td>{`${item.scene}`}</td>
-                            <td>{`${item.imageUrl}`}</td>
+                            <td>{`${movie.character.pinyin}`}</td>
+                            <td>{`${movie.character.hanzi}`}</td>
+                            <td>{`${movie.character.meaning}`}</td>
+                            <td>{`${movie.actor.name}`}</td>
+                            <td>{`${movie.location.title}`}</td>
+                            <td>{`${movie.room.title}`}</td>
+                            <td>{`${movie.scene}`}</td>
+                            <td>{`${movie.imageUrl}`}</td>
+                            <td><FontAwesomeIcon icon={faTrashCan} onClick={() => handleDelete(`${movie.id}`)}/></td>
                         </tr>
                         </tbody>
                     ))}
