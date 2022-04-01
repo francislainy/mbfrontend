@@ -18,20 +18,16 @@ const MovieRow = ({movies}) => {
             }
         }
         ,
-        []
+        [showSuccessAlert]
     );
 
     const handleDelete = (id) => {
-        alert(id)
-
         const axiosParams = {
             id: id
         }
 
         deleteMovie(axiosParams)
             .then((response) => {
-                // setShowSuccessAlert(true)
-                // setShowForm(false)
                 setShowSuccessAlert(true)
             })
     }

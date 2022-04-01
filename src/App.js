@@ -5,12 +5,13 @@ import MovieRow from "./components/MovieRow";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import {Button, Dropdown, DropdownButton} from "react-bootstrap";
+import DropdownCreateMovie from "./components/DropdownCreateMovie";
 
 const App = () => {
     const [showForm, setShowForm] = useState(false)
     const [showNewMovieButton, setShowNewMovieButton] = useState(true)
     const [showSuccessAlert, setShowSuccessAlert] = useState(false)
-    const [selectedActorId, selectActorId] = useState();
+    const [selectedActorId, selectActorId] = useState(null);
     const [selectedLocationId, selectLocationId] = useState();
     const [selectedRoomId, selectRoomId] = useState();
     const [movieList, setMovieList] = useState({
@@ -231,24 +232,11 @@ const App = () => {
                                 </div>
                                 <div className="row">
                                     <div className="mb-2 col-4">
-                                        <DropdownButton variant="success"
-                                                        title={
-                                                            selectedActorId
-                                                                ? actorList.actors.find((actor) => actor.id === selectedActorId).name
-                                                                : "Select actor"
-                                                        }
-                                                        onSelect={(eventKey) => selectActorId(eventKey)}>
-                                            {actorList.actors.map((actor, index) => {
-                                                return (
-                                                    <Dropdown.Item
-                                                        key={index}
-                                                        eventKey={actor.id}
-                                                        active={actor.id === selectedActorId}>
-                                                        {actor.name}
-                                                    </Dropdown.Item>
-                                                );
-                                            })}
-                                        </DropdownButton>
+                                        <DropdownCreateMovie
+                                            actors={actorList.actors}
+                                            selectActorId={selectActorId}
+                                            selectedActorId={selectedActorId}
+                                        />
                                     </div>
                                     <div className="mb-2 col-4">
                                         <DropdownButton variant="success"
@@ -308,6 +296,9 @@ const App = () => {
                 <section className="lists">
                     <MovieRow movies={movieList.movies}/>
                 </section>
+
+                <p>Actor id</p>
+                <p>{selectedActorId} + "id"</p>
             </div>
         </div>
     )
