@@ -4,16 +4,17 @@ import {createMovie, getActors, getLocations, getMovies, getRooms} from "./api"
 import MovieRow from "./components/MovieRow";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-import {Button, Dropdown, DropdownButton} from "react-bootstrap";
+import {Button} from "react-bootstrap";
 import DropdownCreateMovie from "./components/DropdownCreateMovie";
+import DropdownCreateMovieUsePropertyTitle from "./components/DropdownCreateMovieUsePropertyTitle";
 
 const App = () => {
     const [showForm, setShowForm] = useState(false)
     const [showNewMovieButton, setShowNewMovieButton] = useState(true)
     const [showSuccessAlert, setShowSuccessAlert] = useState(false)
     const [selectedActorId, selectActorId] = useState(null);
-    const [selectedLocationId, selectLocationId] = useState();
-    const [selectedRoomId, selectRoomId] = useState();
+    const [selectedLocationId, selectLocationId] = useState(null);
+    const [selectedRoomId, selectRoomId] = useState(null);
     const [movieList, setMovieList] = useState({
         movies: [
             {
@@ -239,44 +240,20 @@ const App = () => {
                                         />
                                     </div>
                                     <div className="mb-2 col-4">
-                                        <DropdownButton variant="success"
-                                                        title={
-                                                            selectedLocationId
-                                                                ? locationList.locations.find((location) => location.id === selectedLocationId).title
-                                                                : "Select location"
-                                                        }
-                                                        onSelect={(eventKey) => selectLocationId(eventKey)}>
-                                            {locationList.locations.map((location, index) => {
-                                                return (
-                                                    <Dropdown.Item
-                                                        key={index}
-                                                        eventKey={location.id}
-                                                        active={location.id === selectedLocationId}>
-                                                        {location.title}
-                                                    </Dropdown.Item>
-                                                );
-                                            })}
-                                        </DropdownButton>
+                                        <DropdownCreateMovieUsePropertyTitle
+                                            title="location"
+                                            list={locationList.locations}
+                                            selectActorId={selectLocationId}
+                                            selectedActorId={selectedLocationId}
+                                        />
                                     </div>
                                     <div className="mb-2 col-4">
-                                        <DropdownButton variant="success"
-                                                        title={
-                                                            selectedRoomId
-                                                                ? roomList.rooms.find((room) => room.id === selectedRoomId).title
-                                                                : "Select room"
-                                                        }
-                                                        onSelect={(eventKey) => selectRoomId(eventKey)}>
-                                            {roomList.rooms.map((room, index) => {
-                                                return (
-                                                    <Dropdown.Item
-                                                        key={index}
-                                                        eventKey={room.id}
-                                                        active={room.id === selectedRoomId}>
-                                                        {room.title}
-                                                    </Dropdown.Item>
-                                                );
-                                            })}
-                                        </DropdownButton>
+                                        <DropdownCreateMovieUsePropertyTitle
+                                            title="room"
+                                            list={roomList.rooms}
+                                            selectActorId={selectRoomId}
+                                            selectedActorId={selectedRoomId}
+                                        />
                                     </div>
                                 </div>
                                 <div className="mb-2 col-12">
