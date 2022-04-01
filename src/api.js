@@ -23,4 +23,29 @@ exports.createMovie = axiosParams => {
     })
 }
 
+exports.getActors = () => {
+    return axios.request({
+        method: "GET",
+        baseURL: BASE_URL,
+        url: `${BASE_URL}/api/mb/actor`,
+        headers: {Accept: "application/json"},
+    })
+}
 
+exports.getLocations = () => {
+    return axios.request({
+        method: "GET",
+        baseURL: BASE_URL,
+        url: `${BASE_URL}/api/mb/location`,
+        headers: {Accept: "application/json"},
+    })
+}
+
+exports.getRooms = () => {
+    return axios.request({
+        method: "GET",
+        baseURL: BASE_URL,
+        url: `${BASE_URL}/api/mb/room`,
+        headers: {Accept: "application/json"},
+    })
+}
