@@ -1,10 +1,19 @@
 import React, {useEffect, useState} from 'react';
+import {useNavigate} from "react-router-dom";
 import './MovieRow.css';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faTrashCan} from '@fortawesome/free-solid-svg-icons'
 import {deleteMovie} from "../api";
 
 const MovieRow = ({movies}) => {
+
+    let navigate = useNavigate();
+
+    const handleClick = (event) => {
+        // event.stopPropagation() todo: to avoid calling the click method for each individual table cell
+        navigate('movie/someid')
+    }
+
     const [showSuccessAlert, setShowSuccessAlert] = useState(false)
 
     useEffect(() => {
@@ -59,14 +68,14 @@ const MovieRow = ({movies}) => {
                     {movies.length > 0 && movies.map((movie, key) => (
                         <tbody className="table-light">
                         <tr>
-                            <td>{`${movie.character.pinyin}`}</td>
-                            <td>{`${movie.character.hanzi}`}</td>
-                            <td>{`${movie.character.meaning}`}</td>
-                            <td>{`${movie.actor.name}`}</td>
-                            <td>{`${movie.location.title}`}</td>
-                            <td>{`${movie.room.title}`}</td>
-                            <td>{`${movie.scene}`}</td>
-                            <td>{`${movie.imageUrl}`}</td>
+                            <td onClick={handleClick}>{`${movie.character.pinyin}`} </td>
+                            <td onClick={handleClick}>{`${movie.character.hanzi}`} </td>
+                            <td onClick={handleClick}>{`${movie.character.meaning}`} </td>
+                            <td onClick={handleClick}>{`${movie.actor.name}`} </td>
+                            <td onClick={handleClick}>{`${movie.location.title}`} </td>
+                            <td onClick={handleClick}>{`${movie.room.title}`} </td>
+                            <td onClick={handleClick}>{`${movie.scene}`} </td>
+                            <td onClick={handleClick}>{`${movie.imageUrl}`} </td>
                             <td><FontAwesomeIcon icon={faTrashCan} onClick={() => handleDelete(`${movie.id}`)}/></td>
                         </tr>
                         </tbody>
