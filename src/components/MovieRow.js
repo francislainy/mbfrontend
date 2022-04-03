@@ -30,7 +30,8 @@ const MovieRow = ({movies}) => {
         [showSuccessAlert]
     );
 
-    const handleDelete = (id) => {
+    const handleDelete = (e, id) => {
+        e.stopPropagation()
         const axiosParams = {
             id: id
         }
@@ -67,16 +68,16 @@ const MovieRow = ({movies}) => {
                     </thead>
                     {movies.length > 0 && movies.map((movie, key) => (
                         <tbody className="table-light">
-                        <tr>
-                            <td onClick={handleClick}>{`${movie.character.pinyin}`} </td>
-                            <td onClick={handleClick}>{`${movie.character.hanzi}`} </td>
-                            <td onClick={handleClick}>{`${movie.character.meaning}`} </td>
-                            <td onClick={handleClick}>{`${movie.actor.name}`} </td>
-                            <td onClick={handleClick}>{`${movie.location.title}`} </td>
-                            <td onClick={handleClick}>{`${movie.room.title}`} </td>
-                            <td onClick={handleClick}>{`${movie.scene}`} </td>
-                            <td onClick={handleClick}>{`${movie.imageUrl}`} </td>
-                            <td><FontAwesomeIcon icon={faTrashCan} onClick={() => handleDelete(`${movie.id}`)}/></td>
+                        <tr onClick={handleClick}>
+                            <td>{`${movie.character.pinyin}`} </td>
+                            <td>{`${movie.character.hanzi}`} </td>
+                            <td>{`${movie.character.meaning}`} </td>
+                            <td>{`${movie.actor.name}`} </td>
+                            <td>{`${movie.location.title}`} </td>
+                            <td>{`${movie.room.title}`} </td>
+                            <td>{`${movie.scene}`} </td>
+                            <td>{`${movie.imageUrl}`} </td>
+                            <td><FontAwesomeIcon icon={faTrashCan} onClick={(e) => handleDelete(e, `${movie.id}`)}/></td>
                         </tr>
                         </tbody>
                     ))}
