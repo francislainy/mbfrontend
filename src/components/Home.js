@@ -273,9 +273,6 @@ const Home = () => {
                 <section className="lists">
                     <MovieRow movies={movieList.movies}/>
                 </section>
-
-                <p>Actor id</p>
-                <p>{selectedActorId} + "id"</p>
             </div>
         </div>
     )

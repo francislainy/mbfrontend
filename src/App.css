@@ -18,6 +18,9 @@ body {
     /*color: white !important;*/
     border-collapse: collapse;
 }
+th {
+    background: #f5b615 !important;
+}
 
 .navigation-clean {
     background-color: #f5b615;

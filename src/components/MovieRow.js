@@ -9,9 +9,8 @@ const MovieRow = ({movies}) => {
 
     let navigate = useNavigate();
 
-    const handleClick = (event) => {
-        // event.stopPropagation() todo: to avoid calling the click method for each individual table cell
-        navigate('movie/someid')
+    const handleClick = (id) => {
+        navigate(`movie/${id}`)
     }
 
     const [showSuccessAlert, setShowSuccessAlert] = useState(false)
@@ -31,7 +30,7 @@ const MovieRow = ({movies}) => {
     );
 
     const handleDelete = (e, id) => {
-        e.stopPropagation()
+        e.stopPropagation();
         const axiosParams = {
             id: id
         }
@@ -54,21 +53,23 @@ const MovieRow = ({movies}) => {
         <div>
             {showSuccessAlert ? getAlert() : null}
             <div className="movieRow--listarea">
-                <table className="table table-bordered table-dark">
+                <table className="table table-bordered">
                     <thead>
-                    <th>Pinyin</th>
-                    <th>Character</th>
-                    <th>Meaning</th>
-                    <th>Actor</th>
-                    <th>Location</th>
-                    <th>Room</th>
-                    <th>Scene</th>
-                    <th>Image Url</th>
-                    <th>Delete Movie</th>
+                    <tr>
+                        <th>Pinyin</th>
+                        <th>Character</th>
+                        <th>Meaning</th>
+                        <th>Actor</th>
+                        <th>Location</th>
+                        <th>Room</th>
+                        <th>Scene</th>
+                        <th>Image Url</th>
+                        <th>Delete Movie</th>
+                    </tr>
                     </thead>
                     {movies.length > 0 && movies.map((movie, key) => (
                         <tbody className="table-light">
-                        <tr onClick={handleClick}>
+                        <tr onClick={() => handleClick(`${movie.id}`)}>
                             <td>{`${movie.character.pinyin}`} </td>
                             <td>{`${movie.character.hanzi}`} </td>
                             <td>{`${movie.character.meaning}`} </td>
