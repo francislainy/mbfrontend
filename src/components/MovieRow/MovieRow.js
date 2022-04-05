@@ -3,7 +3,7 @@ import {useNavigate} from "react-router-dom";
 import './MovieRow.css';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faTrashCan} from '@fortawesome/free-solid-svg-icons'
-import {deleteMovie} from "../api";
+import {deleteMovie} from "../../api";
 
 const MovieRow = ({movies}) => {
 

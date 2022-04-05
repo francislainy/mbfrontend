@@ -1,5 +1,5 @@
 import React from 'react';
-import './MovieRow.css';
+import './MovieRow/MovieRow.css';
 import {Dropdown, DropdownButton} from "react-bootstrap";
 
 const DropdownCreateMovieUsePropertyTitle = ({list, selectedId, selectId, title}) => {

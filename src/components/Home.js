@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import '../App.css'
 import {createMovie, getActors, getLocations, getMovies, getRooms} from "../api"
-import MovieRow from "./MovieRow";
+import MovieRow from "./MovieRow/MovieRow";
 import {Button} from "react-bootstrap";
 import DropdownCreateMovie from "./DropdownCreateMovie";
 import DropdownCreateMovieUsePropertyTitle from "./DropdownCreateMovieUsePropertyTitle";
@@ -17,22 +17,22 @@ const Home = () => {
         movies: [
             {
                 actor: {
-                    id: "1bfff94a-b70e-4b39-bd2a-be1c0f898589",
+                    id: "",
                 },
                 character: {
-                    hanzi: "西",
-                    pinyin: "xi",
-                    meaning: "West"
+                    hanzi: "",
+                    pinyin: "",
+                    meaning: ""
                 },
                 room: {
-                    id: "1bfff94a-b70e-4b39-bd2a-be1c0f898589",
-                    title: "Bedroom"
+                    id: "",
+                    title: ""
                 },
-                scene: "Kanye West talking to Shakira outside the front entrance",
-                imageUrl: "anyUrl",
+                scene: "",
+                imageUrl: "",
                 location: {
-                    id: "1bfff94a-b70e-4b39-bd2a-be1c0f898589",
-                    title: "Childhood home"
+                    id: "",
+                    title: ""
                 }
             }
         ]
@@ -180,27 +180,6 @@ const Home = () => {
 
     return (
         <div className="page">
-            <nav className="navbar navbar-light navbar-expand-lg navigation-clean">
-                <div className="container">
-                    <a className="navbar-brand" href="#">Mandarin Movies</a>
-                    <div id="navcol-2" className="collapse navbar-collapse">
-                        <ul className="navbar-nav ms-auto">
-                            <li className="nav-item">
-                                <a className="nav-link active">My Movies</a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link">Actors</a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link">Locations</a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link">Rooms</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
             {showSuccessAlert ? getAlert() : null}
             <div className="container">
                 <div className="button-container">
