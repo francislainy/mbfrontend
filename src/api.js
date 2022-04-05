@@ -19,7 +19,6 @@ exports.getMovie = (id) => {
     })
 }
 
-
 exports.createMovie = axiosParams => {
     const payload = axiosParams.payload
     return axios.request({
@@ -58,6 +57,28 @@ exports.getLocations = () => {
         headers: {Accept: "application/json"},
     })
 }
+
+exports.createLocation = axiosParams => {
+    const payload = axiosParams.payload
+    return axios.request({
+        method: "POST",
+        baseURL: BASE_URL,
+        url: `${BASE_URL}/api/mb/location`,
+        data: payload,
+        headers: {Accept: "application/json"},
+    })
+}
+
+exports.deleteLocation = axiosParams => {
+    const id = axiosParams.id
+    return axios.request({
+        method: "DELETE",
+        baseURL: BASE_URL,
+        url: `${BASE_URL}/api/mb/location/${id}`,
+        headers: {Accept: "application/json"},
+    })
+}
+
 
 exports.getRooms = () => {
     return axios.request({

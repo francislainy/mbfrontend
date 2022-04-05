@@ -1,29 +1,45 @@
 import React, {useEffect, useState} from 'react';
-import {useParams} from "react-router-dom";
+import {getLocations} from "../api";
+import LocationRow from "./LocationRow";
+import CreateNewLocation from "./CreateNewLocation";
 
 const Location = () => {
+    const [showForm, setShowForm] = useState(false)
+    const [showSuccessAlert, setShowSuccessAlert] = useState(false)
+    const [locationList, setLocationList] = useState({
+        locations: [
+            {
+                id: "",
+                title: "",
+                associatedPinyinSound: "",
+            }
+        ]
+    })
 
-    // const [data, setData] = useState()
-    //
-    // const {id} = useParams();
-    //
-    // useEffect(() => {
-    //     const loadAll = async () => {
-    //         try {
-    //             getMovie(id).then(response => setData(response.data))
-    //         } catch (e) {
-    //             console.log(e + "error")
-    //         }
-    //     }
-    //
-    //     loadAll().then(r => console.log(r));
-    // }, [])
+    useEffect(() => {
+        const loadAll = async () => {
+            try {
+                getLocations().then(response => setLocationList(response.data))
+            } catch (e) {
+                console.log(e + "error")
+            }
+        }
+
+        loadAll().then(r => console.log(r));
+    }, [showForm, showSuccessAlert])
 
     return (
         <div>
-            <div>
-                {/*{data && data.character.hanzi}*/}
-                Location
+            <div className="container">
+                <CreateNewLocation
+                    setShowForm={setShowForm}
+                    showForm={showForm}
+                />
+                <section className="lists">
+                    <LocationRow locations={locationList.locations}
+                                 showSuccessAlert={showSuccessAlert}
+                                 setShowSuccessAlert={setShowSuccessAlert}/>
+                </section>
             </div>
         </div>
     )

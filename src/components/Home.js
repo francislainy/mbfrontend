@@ -47,7 +47,8 @@ const Home = () => {
     return (
         <div className="container">
             <CreateNewMovie
-                movieList={movieList} setMovieList={setMovieList}
+                movieList={movieList}
+                setMovieList={setMovieList}
                 setShowForm={setShowForm}
                 showForm={showForm}
             />
