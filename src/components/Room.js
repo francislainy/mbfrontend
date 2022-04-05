@@ -1,29 +1,44 @@
 import React, {useEffect, useState} from 'react';
-import {useParams} from "react-router-dom";
+import {getRooms} from "../api";
+import CreateNewRoom from "./CreateNewRoom";
+import RoomRow from "./RoomRow";
 
 const Room = () => {
+    const [showForm, setShowForm] = useState(false)
+    const [showSuccessAlert, setShowSuccessAlert] = useState(false)
+    const [roomList, setRoomList] = useState({
+        rooms: [
+            {
+                id: "",
+                title: "",
+            }
+        ]
+    })
 
-    // const [data, setData] = useState()
-    //
-    // const {id} = useParams();
-    //
-    // useEffect(() => {
-    //     const loadAll = async () => {
-    //         try {
-    //             getMovie(id).then(response => setData(response.data))
-    //         } catch (e) {
-    //             console.log(e + "error")
-    //         }
-    //     }
-    //
-    //     loadAll().then(r => console.log(r));
-    // }, [])
+    useEffect(() => {
+        const loadAll = async () => {
+            try {
+                getRooms().then(response => setRoomList(response.data))
+            } catch (e) {
+                console.log(e + "error")
+            }
+        }
+
+        loadAll().then(r => console.log(r));
+    }, [showForm, showSuccessAlert])
 
     return (
         <div>
-            <div>
-                {/*{data && data.character.hanzi}*/}
-                Room
+            <div className="container">
+                <CreateNewRoom
+                    setShowForm={setShowForm}
+                    showForm={showForm}
+                />
+                <section className="lists">
+                    <RoomRow rooms={roomList.rooms}
+                                 showSuccessAlert={showSuccessAlert}
+                                 setShowSuccessAlert={setShowSuccessAlert}/>
+                </section>
             </div>
         </div>
     )
