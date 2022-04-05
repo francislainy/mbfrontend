@@ -1,10 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import '../App.css'
-import {createMovie, getActors, getLocations, getMovies, getRooms} from "../api"
+import {createMovie, getMovies} from "../api"
 import MovieRow from "./MovieRow/MovieRow";
 import {Button} from "react-bootstrap";
-import DropdownCreateMovie from "./DropdownCreateMovie";
-import DropdownCreateMovieUsePropertyTitle from "./DropdownCreateMovieUsePropertyTitle";
+import NewMovieForm from "./NewMovieForm";
 
 const Home = () => {
     const [showForm, setShowForm] = useState(false)
@@ -38,33 +37,6 @@ const Home = () => {
         ]
     })
 
-    const [actorList, setActorList] = useState({
-        actors: [
-            {
-                id: '',
-                name: ''
-            },
-        ]
-    })
-
-    const [locationList, setLocationList] = useState({
-        locations: [
-            {
-                id: '',
-                title: ''
-            },
-        ]
-    })
-
-    const [roomList, setRoomList] = useState({
-        rooms: [
-            {
-                id: '',
-                title: ''
-            },
-        ]
-    })
-
     useEffect(() => {
             const timeId = setTimeout(() => {
                 // After 3 seconds set the show value to false
@@ -91,41 +63,6 @@ const Home = () => {
         loadAll().then(r => console.log(r));
     }, [showForm]);
 
-    useEffect(() => {
-        const loadAll = async () => {
-            try {
-                getActors().then(response => setActorList(response.data))
-            } catch (e) {
-                console.log(e + "error")
-            }
-        }
-
-        loadAll().then(r => console.log(r));
-    }, [showForm]);
-
-    useEffect(() => {
-        const loadAll = async () => {
-            try {
-                getLocations().then(response => setLocationList(response.data))
-            } catch (e) {
-                console.log(e + "error")
-            }
-        }
-
-        loadAll().then(r => console.log(r));
-    }, [showForm])
-
-    useEffect(() => {
-        const loadAll = async () => {
-            try {
-                getRooms().then(response => setRoomList(response.data))
-            } catch (e) {
-                console.log(e + "error")
-            }
-        }
-
-        loadAll().then(r => console.log(r));
-    }, [showForm]);
 
     function handleSubmit(e) {
         e.preventDefault()
@@ -195,52 +132,14 @@ const Home = () => {
                                         onClick={handleHideForm}>X</Button>
                             </div>
                             <h2 style={{color: "#f5b615"}}>Create new movie</h2>
-                            <div className="a">
-                                <div className="row">
-                                    <div className="mb-2 col-2">
-                                        <input className="form-control" type="text" name="character"
-                                               placeholder="Character"/>
-                                    </div>
-                                    <div className="mb-2 col-2">
-                                        <input className="form-control" type="text" name="pinyin" placeholder="Pinyin"/>
-                                    </div>
-                                    <div className="mb-2 col-8">
-                                        <input className="form-control" type="text" name="meaning"
-                                               placeholder="Meaning"/>
-                                    </div>
-                                </div>
-                                <div className="row">
-                                    <div className="mb-2 col-4">
-                                        <DropdownCreateMovie
-                                            title="actor"
-                                            list={actorList.actors}
-                                            selectId={selectActorId}
-                                            selectedId={selectedActorId}
-                                        />
-                                    </div>
-                                    <div className="mb-2 col-4">
-                                        <DropdownCreateMovieUsePropertyTitle
-                                            title="location"
-                                            list={locationList.locations}
-                                            selectId={selectLocationId}
-                                            selectedId={selectedLocationId}
-                                        />
-                                    </div>
-                                    <div className="mb-2 col-4">
-                                        <DropdownCreateMovieUsePropertyTitle
-                                            title="room"
-                                            list={roomList.rooms}
-                                            selectId={selectRoomId}
-                                            selectedId={selectedRoomId}
-                                        />
-                                    </div>
-                                </div>
-                                <div className="mb-2 col-12">
-                                <textarea className="form-control" name="scene" placeholder="Scene"
-                                          rows="14"></textarea>
-                                </div>
-                            </div>
-
+                            <NewMovieForm
+                                selectActorId={selectActorId}
+                                selectedActorId={selectedActorId}
+                                selectedLocationId={selectedLocationId}
+                                selectLocationId={selectLocationId}
+                                selectRoomId={selectRoomId}
+                                selectedRoomId={selectedRoomId}
+                            />
                             <div>
                                 <button className="btn btn-warning submit-button" type="submit"
                                         onSubmit={() => handleSubmit()}>Send
