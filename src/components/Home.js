@@ -6,6 +6,7 @@ import CreateNewMovie from "./CreateNewMovie";
 
 const Home = () => {
     const [showForm, setShowForm] = useState(false)
+    const [showSuccessAlert, setShowSuccessAlert] = useState(false)
     const [movieList, setMovieList] = useState({
         movies: [
             {
@@ -41,7 +42,7 @@ const Home = () => {
         }
 
         loadAll().then(r => console.log(r));
-    }, [showForm]);
+    }, [showForm, showSuccessAlert]);
 
     return (
         <div className="container">
@@ -51,7 +52,8 @@ const Home = () => {
                 showForm={showForm}
             />
             <section className="lists">
-                <MovieRow movies={movieList.movies}/>
+                <MovieRow movies={movieList.movies} showSuccessAlert={showSuccessAlert}
+                          setShowSuccessAlert={setShowSuccessAlert}/>
             </section>
         </div>
     )

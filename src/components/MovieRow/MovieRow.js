@@ -1,19 +1,17 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {useNavigate} from "react-router-dom";
 import './MovieRow.css';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faTrashCan} from '@fortawesome/free-solid-svg-icons'
 import {deleteMovie} from "../../api";
 
-const MovieRow = ({movies}) => {
+const MovieRow = ({movies, showSuccessAlert, setShowSuccessAlert}) => {
 
     let navigate = useNavigate();
 
     const handleClick = (id) => {
         navigate(`movie/${id}`)
     }
-
-    const [showSuccessAlert, setShowSuccessAlert] = useState(false)
 
     useEffect(() => {
             const timeId = setTimeout(() => {
