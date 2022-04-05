@@ -18,7 +18,7 @@ const MovieRow = ({movies}) => {
     useEffect(() => {
             const timeId = setTimeout(() => {
                 // After 3 seconds set the show value to false
-                // setShowSuccessAlert(false)
+                setShowSuccessAlert(false)
             }, 3000)
 
             return () => {
@@ -28,6 +28,10 @@ const MovieRow = ({movies}) => {
         ,
         [showSuccessAlert]
     );
+
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [showSuccessAlert])
 
     const handleDelete = (e, id) => {
         e.stopPropagation();
@@ -69,7 +73,7 @@ const MovieRow = ({movies}) => {
                     </thead>
                     {movies.length > 0 && movies.map((movie, key) => (
                         <tbody className="table-light">
-                        <tr onClick={() => handleClick(`${movie.id}`)}>
+                        <tr style={{cursor: 'pointer'}} onClick={() => handleClick(`${movie.id}`)}>
                             <td>{`${movie.character.pinyin}`} </td>
                             <td>{`${movie.character.hanzi}`} </td>
                             <td>{`${movie.character.meaning}`} </td>
