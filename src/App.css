@@ -9,21 +9,11 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
-.table-bordered th, .table-bordered td {
-
-}
-
 .table{
-    background: #f5b615 !important;
-    /*color: white !important;*/
     border-collapse: collapse;
-}
-th {
-    background: #f5b615 !important;
 }
 
 .navigation-clean {
-    background-color: #f5b615;
     padding-top: .75rem;
     padding-bottom: .75rem;
     color: #333;
@@ -38,8 +28,6 @@ th {
 }
 
 .new-movie-button {
-    background-color: #f5b615 !important;
-    border-color: #f5b615 !important;
     margin-bottom: 16px;
 }
 
@@ -60,4 +48,8 @@ button:hover, button:focus {
     outline: none;
 }
 
-
+.btn-custom {
+    border-color: black !important;
+    color: white !important;
+    background-color: black !important;
+}

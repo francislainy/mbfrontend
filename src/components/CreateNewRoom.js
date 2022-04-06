@@ -74,7 +74,7 @@ const CreateNewRoom = ({showForm, setShowForm}) => {
                                 <Button className="new-movie-button shadow-none"
                                         onClick={handleHideForm}>X</Button>
                             </div>
-                            <h2 style={{color: "#f5b615"}}>Create new room</h2>
+                            <h2 style={{color: "#AAA"}}>Create new room</h2>
                             <div className="row">
                                 <div className="mb-2 col-2">
                                     <input className="form-control" type="text" name="title"
@@ -82,7 +82,7 @@ const CreateNewRoom = ({showForm, setShowForm}) => {
                                 </div>
                             </div>
                             <div>
-                                <button className="btn btn-warning submit-button" type="submit"
+                                <button className="btn btn-primary submit-button" type="submit"
                                         onSubmit={() => handleSubmit()}>Send
                                 </button>
                             </div>

@@ -3,9 +3,10 @@ import './MovieRow/MovieRow.css';
 import {Dropdown, DropdownButton} from "react-bootstrap";
 
 const DropdownCreateMovieUsePropertyTitle = ({list, selectedId, selectId, title}) => {
+
     return (
         <div>
-            <DropdownButton variant="success"
+            <DropdownButton variant="custom"
                             title={
                                 selectedId
                                     ? list.find((item) => item.id === selectedId).title

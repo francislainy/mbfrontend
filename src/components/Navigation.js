@@ -5,7 +5,7 @@ const Navigation = () => {
 
     return (
         <div>
-            <nav className="navbar navbar-light navbar-expand-lg navigation-clean">
+            <nav className="navbar navbar-dark navbar-expand bg-dark ">
                 <div className="container">
                     <NavLink to="/" className="navbar-brand">Mandarin Movies</NavLink>
                     <div id="navcol-2" className="collapse navbar-collapse">

@@ -92,7 +92,7 @@ const CreateNewMovie = ({showForm, setShowForm}) => {
                                 <Button className="new-movie-button shadow-none"
                                         onClick={handleHideForm}>X</Button>
                             </div>
-                            <h2 style={{color: "#f5b615"}}>Create new movie</h2>
+                            <h2 style={{color: "#AAA"}}>Create new movie</h2>
                             <NewMovieForm
                                 selectActorId={selectActorId}
                                 selectedActorId={selectedActorId}
@@ -102,7 +102,7 @@ const CreateNewMovie = ({showForm, setShowForm}) => {
                                 selectedRoomId={selectedRoomId}
                             />
                             <div>
-                                <button className="btn btn-warning submit-button" type="submit"
+                                <button className="btn btn-primary submit-button" type="submit"
                                         onSubmit={() => handleSubmit()}>Send
                                 </button>
                             </div>

@@ -55,7 +55,7 @@ const MovieRow = ({movies, showSuccessAlert, setShowSuccessAlert}) => {
         <div>
             {showSuccessAlert ? getAlert() : null}
             <div className="movieRow--listarea">
-                <table className="table table-bordered">
+                <table className="table">
                     <thead>
                     <tr>
                         <th>Pinyin</th>
@@ -66,7 +66,7 @@ const MovieRow = ({movies, showSuccessAlert, setShowSuccessAlert}) => {
                         <th>Room</th>
                         <th>Scene</th>
                         <th>Image Url</th>
-                        <th>Delete Movie</th>
+                        <th></th>
                     </tr>
                     </thead>
                     {movies.length > 0 && movies.map((movie, key) => (

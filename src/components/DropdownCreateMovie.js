@@ -5,7 +5,7 @@ import {Dropdown, DropdownButton} from "react-bootstrap";
 const DropdownCreateMovie = ({list, selectedId, selectId, title}) => {
     return (
         <div>
-            <DropdownButton variant="success"
+            <DropdownButton variant="custom"
                             title={
                                 selectedId
                                     ? list.find((item) => item.id === selectedId).name

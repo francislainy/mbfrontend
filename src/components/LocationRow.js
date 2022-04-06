@@ -47,11 +47,11 @@ const LocationRow = ({locations, showSuccessAlert, setShowSuccessAlert}) => {
         <div>
             {showSuccessAlert ? getAlert() : null}
             <div className="movieRow--listarea">
-                <table className="table table-bordered">
+                <table className="table">
                     <thead>
                     <tr>
                         <th>Pinyin</th>
-                        <th>AssociatedPinyinSound</th>
+                        <th>Associated Pinyin Sound</th>
                         <th>Delete location</th>
                     </tr>
                     </thead>
