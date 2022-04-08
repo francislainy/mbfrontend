@@ -1,9 +1,9 @@
 import React, {useEffect} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTrashCan} from "@fortawesome/free-solid-svg-icons";
-import {deleteActor} from "../api";
+import {deleteRoom} from "../../api";
 
-const ActorRow = ({actors, showSuccessAlert, setShowSuccessAlert}) => {
+const RoomRow = ({rooms, showSuccessAlert, setShowSuccessAlert}) => {
 
     useEffect(() => {
             const timeId = setTimeout(() => {
@@ -29,7 +29,7 @@ const ActorRow = ({actors, showSuccessAlert, setShowSuccessAlert}) => {
             id: id
         }
 
-        deleteActor(axiosParams)
+        deleteRoom(axiosParams)
             .then((response) => {
                 setShowSuccessAlert(true)
             })
@@ -38,7 +38,7 @@ const ActorRow = ({actors, showSuccessAlert, setShowSuccessAlert}) => {
     function getAlert() { //make it into component
         return <div className="alert alert-success" role="alert">
             <span>
-                <strong>Actor deleted successfully</strong>
+                <strong>Room deleted successfully</strong>
             </span>
         </div>;
     }
@@ -50,21 +50,15 @@ const ActorRow = ({actors, showSuccessAlert, setShowSuccessAlert}) => {
                 <table className="table">
                     <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Associated Pinyin Sound</th>
-                        <th>Family</th>
-                        <th>Image Url</th>
-                        <th>Delete actor</th>
+                        <th>Pinyin</th>
+                        <th>Delete room</th>
                     </tr>
                     </thead>
-                    {actors.length > 0 && actors.map((actor, key) => (
+                    {rooms.length > 0 && rooms.map((room, key) => (
                         <tbody className="table-light">
                         <tr style={{cursor: 'pointer'}}>
-                            <td>{`${actor.name}`} </td>
-                            <td>{`${actor.associatedPinyinSound}`} </td>
-                            <td>{`${actor.family}`} </td>
-                            <td>{`${actor.imageUrl}`} </td>
-                            <td><FontAwesomeIcon icon={faTrashCan} onClick={(e) => handleDelete(e, `${actor.id}`)}/>
+                            <td>{`${room.title}`} </td>
+                            <td><FontAwesomeIcon icon={faTrashCan} onClick={(e) => handleDelete(e, `${room.id}`)}/>
                             </td>
                         </tr>
                         </tbody>
@@ -75,4 +69,4 @@ const ActorRow = ({actors, showSuccessAlert, setShowSuccessAlert}) => {
     )
 }
 
-export default ActorRow;
+export default RoomRow;

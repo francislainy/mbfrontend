@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import '../App.css'
-import {createLocation} from "../api"
+import '../../App.css'
+import {createLocation} from "../../api"
 import {Button} from "react-bootstrap";
 
 const CreateNewLocation = ({showForm, setShowForm}) => {

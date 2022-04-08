@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import '../App.css'
-import {getMovies} from "../api"
+import '../../App.css'
+import {getMovies} from "../../api"
 import MovieRow from "./MovieRow/MovieRow";
 import CreateNewMovie from "./CreateNewMovie";
 

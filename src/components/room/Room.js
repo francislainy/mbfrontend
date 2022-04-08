@@ -1,17 +1,16 @@
 import React, {useEffect, useState} from 'react';
-import {getLocations} from "../api";
-import LocationRow from "./LocationRow";
-import CreateNewLocation from "./CreateNewLocation";
+import {getRooms} from "../../api";
+import CreateNewRoom from "./CreateNewRoom";
+import RoomRow from "./RoomRow";
 
-const Location = () => {
+const Room = () => {
     const [showForm, setShowForm] = useState(false)
     const [showSuccessAlert, setShowSuccessAlert] = useState(false)
-    const [locationList, setLocationList] = useState({
-        locations: [
+    const [roomList, setRoomList] = useState({
+        rooms: [
             {
                 id: "",
                 title: "",
-                associatedPinyinSound: "",
             }
         ]
     })
@@ -19,7 +18,7 @@ const Location = () => {
     useEffect(() => {
         const loadAll = async () => {
             try {
-                getLocations().then(response => setLocationList(response.data))
+                getRooms().then(response => setRoomList(response.data))
             } catch (e) {
                 console.log(e + "error")
             }
@@ -31,12 +30,12 @@ const Location = () => {
     return (
         <div>
             <div className="container">
-                <CreateNewLocation
+                <CreateNewRoom
                     setShowForm={setShowForm}
                     showForm={showForm}
                 />
                 <section className="lists">
-                    <LocationRow locations={locationList.locations}
+                    <RoomRow rooms={roomList.rooms}
                                  showSuccessAlert={showSuccessAlert}
                                  setShowSuccessAlert={setShowSuccessAlert}/>
                 </section>
@@ -45,4 +44,4 @@ const Location = () => {
     )
 }
 
-export default Location;
+export default Room;

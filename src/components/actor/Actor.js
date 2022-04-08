@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import {getActors} from "../api";
-import LocationRow from "./LocationRow";
+import {getActors} from "../../api";
+import LocationRow from "../location/LocationRow";
 import CreateNewActor from "./CreateNewActor";
 import ActorRow from "./ActorRow";
 

@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import '../App.css'
-import {createRoom} from "../api"
+import '../../App.css'
+import {createActor} from "../../api"
 import {Button} from "react-bootstrap";
 
-const CreateNewRoom = ({showForm, setShowForm}) => {
-    const [showNewRoomButton, setShowNewRoomButton] = useState(true)
+const CreateNewActor = ({showForm, setShowForm}) => {
+    const [showNewActorButton, setShowNewActorButton] = useState(true)
     const [showSuccessAlert, setShowSuccessAlert] = useState(false)
 
     useEffect(() => {
@@ -16,46 +16,48 @@ const CreateNewRoom = ({showForm, setShowForm}) => {
             return () => {
                 clearTimeout(timeId)
             }
-        }
-        ,
+        },
         [showForm]
     );
 
     function handleSubmit(e) {
         e.preventDefault()
-        const {title} = e.target
+        const {name, associatedPinyinSound, family, imageUrl} = e.target
         let values = {
-            title: title.value,
+            name: name.value,
+            associatedPinyinSound: associatedPinyinSound.value,
+            family: family.value,
+            imageUrl: imageUrl.value,
         }
 
         const axiosParams = {
             payload: values
         }
 
-        createRoom(axiosParams)
+        createActor(axiosParams)
             .then((response) => {
                 setShowSuccessAlert(true)
                 setShowForm(false)
-                setShowNewRoomButton(true)
+                setShowNewActorButton(true)
             })
     }
 
     function getAlert() {
         return <div className="alert alert-success" role="alert">
             <span>
-                <strong>Location created successfully</strong>
+                <strong>Actor created successfully</strong>
             </span>
         </div>;
     }
 
     const handleShowForm = () => {
         setShowForm(true)
-        setShowNewRoomButton(false)
+        setShowNewActorButton(false)
     }
 
     const handleHideForm = () => {
         setShowForm(false)
-        setShowNewRoomButton(true)
+        setShowNewActorButton(true)
     }
 
     return (
@@ -63,8 +65,8 @@ const CreateNewRoom = ({showForm, setShowForm}) => {
             {showSuccessAlert ? getAlert() : null}
             <div>
                 <div className="button-container">
-                    {showNewRoomButton && <Button className="new-movie-button shadow-none" onClick={handleShowForm}>New
-                        Room</Button>
+                    {showNewActorButton && <Button className="new-movie-button shadow-none" onClick={handleShowForm}>New
+                        Actor</Button>
                     }
                 </div>
                 {
@@ -74,11 +76,23 @@ const CreateNewRoom = ({showForm, setShowForm}) => {
                                 <Button className="new-movie-button shadow-none"
                                         onClick={handleHideForm}>X</Button>
                             </div>
-                            <h2 style={{color: "#AAA"}}>Create new room</h2>
+                            <h2 style={{color: "#AAA"}}>Create new actor</h2>
                             <div className="row">
                                 <div className="mb-2 col-2">
-                                    <input className="form-control" type="text" name="title"
-                                           placeholder="Title"/>
+                                    <input className="form-control" type="text" name="name"
+                                           placeholder="Name"/>
+                                </div>
+                                <div className="mb-2 col-2">
+                                    <input className="form-control" type="text" name="name"
+                                           placeholder="Associated Pinyin Sound"/>
+                                </div>
+                                <div className="mb-2 col-2">
+                                    <input className="form-control" type="text" name="name"
+                                           placeholder="Family"/>
+                                </div>
+                                <div className="mb-2 col-2">
+                                    <input className="form-control" type="text" name="name"
+                                           placeholder="Image Url"/>
                                 </div>
                             </div>
                             <div>
@@ -94,4 +108,4 @@ const CreateNewRoom = ({showForm, setShowForm}) => {
     )
 }
 
-export default CreateNewRoom;
+export default CreateNewActor;

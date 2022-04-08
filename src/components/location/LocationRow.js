@@ -1,9 +1,9 @@
 import React, {useEffect} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTrashCan} from "@fortawesome/free-solid-svg-icons";
-import {deleteRoom} from "../api";
+import {deleteLocation} from "../../api";
 
-const RoomRow = ({rooms, showSuccessAlert, setShowSuccessAlert}) => {
+const LocationRow = ({locations, showSuccessAlert, setShowSuccessAlert}) => {
 
     useEffect(() => {
             const timeId = setTimeout(() => {
@@ -29,7 +29,7 @@ const RoomRow = ({rooms, showSuccessAlert, setShowSuccessAlert}) => {
             id: id
         }
 
-        deleteRoom(axiosParams)
+        deleteLocation(axiosParams)
             .then((response) => {
                 setShowSuccessAlert(true)
             })
@@ -38,7 +38,7 @@ const RoomRow = ({rooms, showSuccessAlert, setShowSuccessAlert}) => {
     function getAlert() { //make it into component
         return <div className="alert alert-success" role="alert">
             <span>
-                <strong>Room deleted successfully</strong>
+                <strong>Location deleted successfully</strong>
             </span>
         </div>;
     }
@@ -51,14 +51,16 @@ const RoomRow = ({rooms, showSuccessAlert, setShowSuccessAlert}) => {
                     <thead>
                     <tr>
                         <th>Pinyin</th>
-                        <th>Delete room</th>
+                        <th>Associated Pinyin Sound</th>
+                        <th>Delete location</th>
                     </tr>
                     </thead>
-                    {rooms.length > 0 && rooms.map((room, key) => (
+                    {locations.length > 0 && locations.map((location, key) => (
                         <tbody className="table-light">
                         <tr style={{cursor: 'pointer'}}>
-                            <td>{`${room.title}`} </td>
-                            <td><FontAwesomeIcon icon={faTrashCan} onClick={(e) => handleDelete(e, `${room.id}`)}/>
+                            <td>{`${location.title}`} </td>
+                            <td>{`${location.associatedPinyinSound}`} </td>
+                            <td><FontAwesomeIcon icon={faTrashCan} onClick={(e) => handleDelete(e, `${location.id}`)}/>
                             </td>
                         </tr>
                         </tbody>
@@ -69,4 +71,4 @@ const RoomRow = ({rooms, showSuccessAlert, setShowSuccessAlert}) => {
     )
 }
 
-export default RoomRow;
+export default LocationRow;

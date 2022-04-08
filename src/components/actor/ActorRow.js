@@ -1,9 +1,9 @@
 import React, {useEffect} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTrashCan} from "@fortawesome/free-solid-svg-icons";
-import {deleteLocation} from "../api";
+import {deleteActor} from "../../api";
 
-const LocationRow = ({locations, showSuccessAlert, setShowSuccessAlert}) => {
+const ActorRow = ({actors, showSuccessAlert, setShowSuccessAlert}) => {
 
     useEffect(() => {
             const timeId = setTimeout(() => {
@@ -29,7 +29,7 @@ const LocationRow = ({locations, showSuccessAlert, setShowSuccessAlert}) => {
             id: id
         }
 
-        deleteLocation(axiosParams)
+        deleteActor(axiosParams)
             .then((response) => {
                 setShowSuccessAlert(true)
             })
@@ -38,7 +38,7 @@ const LocationRow = ({locations, showSuccessAlert, setShowSuccessAlert}) => {
     function getAlert() { //make it into component
         return <div className="alert alert-success" role="alert">
             <span>
-                <strong>Location deleted successfully</strong>
+                <strong>Actor deleted successfully</strong>
             </span>
         </div>;
     }
@@ -50,17 +50,21 @@ const LocationRow = ({locations, showSuccessAlert, setShowSuccessAlert}) => {
                 <table className="table">
                     <thead>
                     <tr>
-                        <th>Pinyin</th>
+                        <th>Name</th>
                         <th>Associated Pinyin Sound</th>
-                        <th>Delete location</th>
+                        <th>Family</th>
+                        <th>Image Url</th>
+                        <th>Delete actor</th>
                     </tr>
                     </thead>
-                    {locations.length > 0 && locations.map((location, key) => (
+                    {actors.length > 0 && actors.map((actor, key) => (
                         <tbody className="table-light">
                         <tr style={{cursor: 'pointer'}}>
-                            <td>{`${location.title}`} </td>
-                            <td>{`${location.associatedPinyinSound}`} </td>
-                            <td><FontAwesomeIcon icon={faTrashCan} onClick={(e) => handleDelete(e, `${location.id}`)}/>
+                            <td>{`${actor.name}`} </td>
+                            <td>{`${actor.associatedPinyinSound}`} </td>
+                            <td>{`${actor.family}`} </td>
+                            <td>{`${actor.imageUrl}`} </td>
+                            <td><FontAwesomeIcon icon={faTrashCan} onClick={(e) => handleDelete(e, `${actor.id}`)}/>
                             </td>
                         </tr>
                         </tbody>
@@ -71,4 +75,4 @@ const LocationRow = ({locations, showSuccessAlert, setShowSuccessAlert}) => {
     )
 }
 
-export default LocationRow;
+export default ActorRow;

@@ -3,12 +3,12 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
-import Home from "./components/Home";
-import MovieDetail from "./components/MovieDetail/MovieDetail";
+import Home from "./components/movie/Home";
+import MovieDetail from "./components/movie/MovieDetail/MovieDetail";
 import Navigation from "./components/Navigation";
-import Location from "./components/Location";
-import Room from "./components/Room";
-import Actor from "./components/Actor";
+import Location from "./components/location/Location";
+import Room from "./components/room/Room";
+import Actor from "./components/actor/Actor";
 
 function App() {
 

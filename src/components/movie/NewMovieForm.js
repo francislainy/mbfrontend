@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import DropdownCreateMovie from "./DropdownCreateMovie";
 import DropdownCreateMovieUsePropertyTitle from "./DropdownCreateMovieUsePropertyTitle";
-import {getActors, getLocations, getRooms} from "../api";
+import {getActors, getLocations, getRooms} from "../../api";
 
 const NewMovieForm = ({ selectActorId, selectedActorId, selectLocationId, selectedLocationId, selectRoomId, selectedRoomId }) => {
 
