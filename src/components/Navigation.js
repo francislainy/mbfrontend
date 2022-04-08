@@ -11,7 +11,7 @@ const Navigation = () => {
                     <div id="navcol-2" className="collapse navbar-collapse">
                         <ul className="navbar-nav ms-auto">
                             <li className="nav-item">
-                                <NavLink to="/" className="nav-link active">My Movies</NavLink>
+                                <NavLink to="/" className="nav-link">My Movies</NavLink>
                             </li>
                             <li className="nav-item">
                                 <NavLink to={"/actor"} className="nav-link">Actors</NavLink>
