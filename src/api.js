@@ -49,6 +49,27 @@ exports.getActors = () => {
     })
 }
 
+exports.createActor = axiosParams => {
+    const payload = axiosParams.payload
+    return axios.request({
+        method: "POST",
+        baseURL: BASE_URL,
+        url: `${BASE_URL}/api/mb/actor`,
+        data: payload,
+        headers: {Accept: "application/json"},
+    })
+}
+
+exports.deleteActor = axiosParams => {
+    const id = axiosParams.id
+    return axios.request({
+        method: "DELETE",
+        baseURL: BASE_URL,
+        url: `${BASE_URL}/api/mb/actor/${id}`,
+        headers: {Accept: "application/json"},
+    })
+}
+
 exports.getLocations = () => {
     return axios.request({
         method: "GET",

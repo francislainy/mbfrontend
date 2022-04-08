@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import '../App.css'
-import {createLocation} from "../api"
+import {createActor} from "../api"
 import {Button} from "react-bootstrap";
 
-const CreateNewLocation = ({showForm, setShowForm}) => {
-    const [showNewLocationButton, setShowNewLocationButton] = useState(true)
+const CreateNewActor = ({showForm, setShowForm}) => {
+    const [showNewActorButton, setShowNewActorButton] = useState(true)
     const [showSuccessAlert, setShowSuccessAlert] = useState(false)
 
     useEffect(() => {
@@ -16,47 +16,48 @@ const CreateNewLocation = ({showForm, setShowForm}) => {
             return () => {
                 clearTimeout(timeId)
             }
-        }
-        ,
+        },
         [showForm]
     );
 
     function handleSubmit(e) {
         e.preventDefault()
-        const {title, associatedPinyinSound} = e.target
+        const {name, associatedPinyinSound, family, imageUrl} = e.target
         let values = {
-            title: title.value,
+            name: name.value,
             associatedPinyinSound: associatedPinyinSound.value,
+            family: family.value,
+            imageUrl: imageUrl.value,
         }
 
         const axiosParams = {
             payload: values
         }
 
-        createLocation(axiosParams)
+        createActor(axiosParams)
             .then((response) => {
                 setShowSuccessAlert(true)
                 setShowForm(false)
-                setShowNewLocationButton(true)
+                setShowNewActorButton(true)
             })
     }
 
     function getAlert() {
         return <div className="alert alert-success" role="alert">
             <span>
-                <strong>Location created successfully</strong>
+                <strong>Actor created successfully</strong>
             </span>
         </div>;
     }
 
     const handleShowForm = () => {
         setShowForm(true)
-        setShowNewLocationButton(false)
+        setShowNewActorButton(false)
     }
 
     const handleHideForm = () => {
         setShowForm(false)
-        setShowNewLocationButton(true)
+        setShowNewActorButton(true)
     }
 
     return (
@@ -64,8 +65,8 @@ const CreateNewLocation = ({showForm, setShowForm}) => {
             {showSuccessAlert ? getAlert() : null}
             <div>
                 <div className="button-container">
-                    {showNewLocationButton && <Button className="new-movie-button shadow-none" onClick={handleShowForm}>New
-                        Location</Button>
+                    {showNewActorButton && <Button className="new-movie-button shadow-none" onClick={handleShowForm}>New
+                        Actor</Button>
                     }
                 </div>
                 {
@@ -75,15 +76,23 @@ const CreateNewLocation = ({showForm, setShowForm}) => {
                                 <Button className="new-movie-button shadow-none"
                                         onClick={handleHideForm}>X</Button>
                             </div>
-                            <h2 style={{color: "#AAA"}}>Create new location</h2>
+                            <h2 style={{color: "#AAA"}}>Create new actor</h2>
                             <div className="row">
                                 <div className="mb-2 col-2">
-                                    <input className="form-control" type="text" name="title"
-                                           placeholder="Title"/>
+                                    <input className="form-control" type="text" name="name"
+                                           placeholder="Name"/>
                                 </div>
                                 <div className="mb-2 col-2">
-                                    <input className="form-control" type="text" name="associatedPinyinSound"
-                                           placeholder="associatedPinyinSound"/>
+                                    <input className="form-control" type="text" name="name"
+                                           placeholder="Associated Pinyin Sound"/>
+                                </div>
+                                <div className="mb-2 col-2">
+                                    <input className="form-control" type="text" name="name"
+                                           placeholder="Family"/>
+                                </div>
+                                <div className="mb-2 col-2">
+                                    <input className="form-control" type="text" name="name"
+                                           placeholder="Image Url"/>
                                 </div>
                             </div>
                             <div>
@@ -99,4 +108,4 @@ const CreateNewLocation = ({showForm, setShowForm}) => {
     )
 }
 
-export default CreateNewLocation;
+export default CreateNewActor;
