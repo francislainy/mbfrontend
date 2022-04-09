@@ -1,11 +1,8 @@
 import React, {useEffect} from 'react';
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faTrashCan} from "@fortawesome/free-solid-svg-icons";
 import {deleteActor} from "../../api";
-import CustomAlert from "../CustomAlert";
+import ActorTable from "./ActorTable";
 
 const ActorTableContainer = ({actors, showSuccessAlert, setShowSuccessAlert}) => {
-
     useEffect(() => {
             const timeId = setTimeout(() => {
                 // After 3 seconds set the show value to false
@@ -37,34 +34,10 @@ const ActorTableContainer = ({actors, showSuccessAlert, setShowSuccessAlert}) =>
     }
 
     return (
-        <div>
-            {showSuccessAlert ? <CustomAlert item={"Actor"}/> : null}
-            <div className="movieRow--listarea">
-                <table className="table">
-                    <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Associated Pinyin Sound</th>
-                        <th>Family</th>
-                        <th>Image Url</th>
-                        <th>Delete actor</th>
-                    </tr>
-                    </thead>
-                    {actors.length > 0 && actors.map((actor, key) => (
-                        <tbody className="table-light">
-                        <tr style={{cursor: 'pointer'}}>
-                            <td>{`${actor.name}`} </td>
-                            <td>{`${actor.associatedPinyinSound}`} </td>
-                            <td>{`${actor.family}`} </td>
-                            <td>{`${actor.imageUrl}`} </td>
-                            <td><FontAwesomeIcon icon={faTrashCan} onClick={(e) => handleDelete(e, `${actor.id}`)}/>
-                            </td>
-                        </tr>
-                        </tbody>
-                    ))}
-                </table>
-            </div>
-        </div>
+        <ActorTable
+            actors={actors}
+            showSuccessAlert={showSuccessAlert}
+            handleDelete={handleDelete}/>
     )
 }
 

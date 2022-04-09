@@ -1,15 +1,8 @@
 import React, {useEffect} from 'react';
-import {useNavigate} from "react-router-dom";
-import './MovieTableContainer.css';
-import {deleteMovie} from "../../../api";
-import MovieTable from "../MovieTable";
+import {deleteRoom} from "../../api";
+import RoomTable from "./RoomTable";
 
-const MovieTableContainer = ({movies, showSuccessAlert, setShowSuccessAlert}) => {
-    let navigate = useNavigate();
-
-    const handleClick = (id) => {
-        navigate(`movie/${id}`)
-    }
+const RoomTableContainer = ({rooms, showSuccessAlert, setShowSuccessAlert}) => {
 
     useEffect(() => {
             const timeId = setTimeout(() => {
@@ -20,7 +13,8 @@ const MovieTableContainer = ({movies, showSuccessAlert, setShowSuccessAlert}) =>
             return () => {
                 clearTimeout(timeId)
             }
-        },
+        }
+        ,
         [showSuccessAlert]
     );
 
@@ -34,19 +28,26 @@ const MovieTableContainer = ({movies, showSuccessAlert, setShowSuccessAlert}) =>
             id: id
         }
 
-        deleteMovie(axiosParams)
+        deleteRoom(axiosParams)
             .then((response) => {
                 setShowSuccessAlert(true)
             })
     }
 
+    function getAlert() { //make it into component
+        return <div className="alert alert-success" role="alert">
+            <span>
+                <strong>Room deleted successfully</strong>
+            </span>
+        </div>;
+    }
+
     return (
-        <MovieTable
-            movies={movies}
+        <RoomTable
+            rooms={rooms}
             showSuccessAlert={showSuccessAlert}
-            handleClick={handleClick}
             handleDelete={handleDelete}/>
     )
 }
 
-export default MovieTableContainer;
+export default RoomTableContainer;

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {getRooms} from "../../api";
 import CreateNewRoom from "./CreateNewRoom";
-import RoomRow from "./RoomRow";
+import RoomTableContainer from "./RoomTableContainer";
 
 const Room = () => {
     const [showForm, setShowForm] = useState(false)
@@ -35,9 +35,9 @@ const Room = () => {
                     showForm={showForm}
                 />
                 <section className="lists">
-                    <RoomRow rooms={roomList.rooms}
-                                 showSuccessAlert={showSuccessAlert}
-                                 setShowSuccessAlert={setShowSuccessAlert}/>
+                    <RoomTableContainer rooms={roomList.rooms}
+                                        showSuccessAlert={showSuccessAlert}
+                                        setShowSuccessAlert={setShowSuccessAlert}/>
                 </section>
             </div>
         </div>
