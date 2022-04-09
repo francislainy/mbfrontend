@@ -52,6 +52,7 @@ const CharacterRow = ({characters, showSuccessAlert, setShowSuccessAlert}) => {
                     <tr>
                         <th>Hanzi</th>
                         <th>Pinyin</th>
+                        <th>Meaning</th>
                         <th>Delete character</th>
                     </tr>
                     </thead>
@@ -60,6 +61,7 @@ const CharacterRow = ({characters, showSuccessAlert, setShowSuccessAlert}) => {
                         <tr style={{cursor: 'pointer'}}>
                             <td>{`${character.hanzi}`} </td>
                             <td>{`${character.pinyin}`} </td>
+                            <td>{`${character.meaning}`} </td>
                             <td><FontAwesomeIcon icon={faTrashCan} onClick={(e) => handleDelete(e, `${character.id}`)}/>
                             </td>
                         </tr>
