@@ -2,7 +2,6 @@ import React from 'react';
 import {NavLink} from "react-router-dom";
 
 const Navigation = () => {
-
     return (
         <div>
             <nav className="navbar navbar-dark navbar-expand bg-dark ">
@@ -17,13 +16,13 @@ const Navigation = () => {
                                 <NavLink to="/characters" className="nav-link">Characters</NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink to={"/actor"} className="nav-link">Actors</NavLink>
+                                <NavLink to={"/actors"} className="nav-link">Actors</NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink to={"/location"} className="nav-link">Locations</NavLink>
+                                <NavLink to={"/locations"} className="nav-link">Locations</NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink to={"/room"} className="nav-link">Rooms</NavLink>
+                                <NavLink to={"/rooms"} className="nav-link">Rooms</NavLink>
                             </li>
                             <li className="nav-item">
                                 <NavLink to="/" className="nav-link">Flashcards</NavLink>
