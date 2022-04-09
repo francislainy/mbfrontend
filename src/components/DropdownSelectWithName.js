@@ -1,14 +1,14 @@
 import React from 'react';
-import './MovieTableContainer/MovieTableContainer.css';
+import './movie/MovieTableContainer/MovieTableContainer.css';
 import {Dropdown, DropdownButton} from "react-bootstrap";
 
-const DropdownCreateMovieUsePropertyTitle = ({list, selectedId, selectId, title}) => {
+const DropdownSelectWithName = ({list, selectedId, selectId, title}) => {
     return (
         <div>
             <DropdownButton variant="custom"
                             title={
                                 selectedId
-                                    ? list.find((item) => item.id === selectedId).title
+                                    ? list.find((item) => item.id === selectedId).name
                                     : `Select ${title}`
                             }
                             onSelect={(eventKey) => selectId(eventKey)}>
@@ -18,7 +18,7 @@ const DropdownCreateMovieUsePropertyTitle = ({list, selectedId, selectId, title}
                             key={index}
                             eventKey={item.id}
                             active={item.id === selectedId}>
-                            {item.title}
+                            {item.name}
                         </Dropdown.Item>
                     );
                 })}
@@ -27,4 +27,4 @@ const DropdownCreateMovieUsePropertyTitle = ({list, selectedId, selectId, title}
     )
 }
 
-export default DropdownCreateMovieUsePropertyTitle;
+export default DropdownSelectWithName;

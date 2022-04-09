@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import DropdownCreateMovie from "./DropdownCreateMovie";
-import DropdownCreateMovieUsePropertyTitle from "./DropdownCreateMovieUsePropertyTitle";
+import DropdownSelectWithName from "../DropdownSelectWithName";
+import DropdownSelectWithTitle from "../DropdownSelectWithTitle";
 import {getActors, getLocations, getRooms} from "../../api";
 
 const NewMovieForm = ({ selectActorId, selectedActorId, selectLocationId, selectedLocationId, selectRoomId, selectedRoomId }) => {
@@ -86,7 +86,7 @@ const NewMovieForm = ({ selectActorId, selectedActorId, selectLocationId, select
                 </div>
                 <div className="row">
                     <div className="mb-2 col-4">
-                        <DropdownCreateMovie
+                        <DropdownSelectWithName
                             title="actor"
                             list={actorList.actors}
                             selectId={selectActorId}
@@ -94,7 +94,7 @@ const NewMovieForm = ({ selectActorId, selectedActorId, selectLocationId, select
                         />
                     </div>
                     <div className="mb-2 col-4">
-                        <DropdownCreateMovieUsePropertyTitle
+                        <DropdownSelectWithTitle
                             title="location"
                             list={locationList.locations}
                             selectId={selectLocationId}
@@ -102,7 +102,7 @@ const NewMovieForm = ({ selectActorId, selectedActorId, selectLocationId, select
                         />
                     </div>
                     <div className="mb-2 col-4">
-                        <DropdownCreateMovieUsePropertyTitle
+                        <DropdownSelectWithTitle
                             title="room"
                             list={roomList.rooms}
                             selectId={selectRoomId}

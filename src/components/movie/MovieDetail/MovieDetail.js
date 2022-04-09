@@ -3,7 +3,7 @@ import {useParams} from "react-router-dom";
 import {getMovie} from "../../../api";
 import {Button} from "react-bootstrap";
 import './MovieDetail.css'
-import DropdownCreateMovieUsePropertyTitle from "../DropdownCreateMovieUsePropertyTitle";
+import DropdownSelectWithTitle from "../../DropdownSelectWithTitle";
 import sample_movie from './sample_movie.jpeg';
 
 const MovieDetail = () => {
@@ -54,7 +54,7 @@ const MovieDetail = () => {
                             </div>
                             <div className="col-6" style={{marginTop: "170px", width: "30%", height: "100px"}}>
                                 <div className="dropdown">
-                                    <DropdownCreateMovieUsePropertyTitle
+                                    <DropdownSelectWithTitle
                                         title="actor"
                                         list={locationList.locations}
                                         selectId={selectLocationId}
@@ -62,7 +62,7 @@ const MovieDetail = () => {
                                     />
                                 </div>
                                 <div className="dropdown">
-                                    <DropdownCreateMovieUsePropertyTitle
+                                    <DropdownSelectWithTitle
                                         title="location"
                                         list={locationList.locations}
                                         selectId={selectLocationId}
@@ -70,7 +70,7 @@ const MovieDetail = () => {
                                     />
                                 </div>
                                 <div className="dropdown">
-                                    <DropdownCreateMovieUsePropertyTitle
+                                    <DropdownSelectWithTitle
                                         title="room"
                                         list={locationList.locations}
                                         selectId={selectLocationId}
