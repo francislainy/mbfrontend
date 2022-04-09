@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {getActors} from "../../api";
-import LocationRow from "../location/LocationRow";
+import LocationTableContainer from "../location/LocationTableContainer";
 import CreateNewActor from "./CreateNewActor";
-import ActorRow from "./ActorRow";
+import ActorTableContainer from "./ActorTableContainer";
 
 const Actor = () => {
     const [showForm, setShowForm] = useState(false)
@@ -36,9 +36,9 @@ const Actor = () => {
                     showForm={showForm}
                 />
                 <section className="lists">
-                    <ActorRow actors={actorList.actors}
-                              showSuccessAlert={showSuccessAlert}
-                              setShowSuccessAlert={setShowSuccessAlert}/>
+                    <ActorTableContainer actors={actorList.actors}
+                                         showSuccessAlert={showSuccessAlert}
+                                         setShowSuccessAlert={setShowSuccessAlert}/>
                 </section>
             </div>
         </div>

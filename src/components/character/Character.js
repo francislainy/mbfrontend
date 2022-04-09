@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {getCharacters} from "../../api";
-import CharacterRow from "./CharacterRow";
+import CharacterTableContainer from "./CharacterTableContainer";
 import CreateNewCharacter from "./CreateNewCharacter";
 
 const Character = () => {
@@ -36,9 +36,9 @@ const Character = () => {
                     showForm={showForm}
                 />
                 <section className="lists">
-                    <CharacterRow characters={characterList.characters}
-                                  showSuccessAlert={showSuccessAlert}
-                                  setShowSuccessAlert={setShowSuccessAlert}/>
+                    <CharacterTableContainer characters={characterList.characters}
+                                             showSuccessAlert={showSuccessAlert}
+                                             setShowSuccessAlert={setShowSuccessAlert}/>
                 </section>
             </div>
         </div>

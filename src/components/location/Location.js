@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {getLocations} from "../../api";
-import LocationRow from "./LocationRow";
+import LocationTableContainer from "./LocationTableContainer";
 import CreateNewLocation from "./CreateNewLocation";
 
 const Location = () => {
@@ -36,9 +36,9 @@ const Location = () => {
                     showForm={showForm}
                 />
                 <section className="lists">
-                    <LocationRow locations={locationList.locations}
-                                 showSuccessAlert={showSuccessAlert}
-                                 setShowSuccessAlert={setShowSuccessAlert}/>
+                    <LocationTableContainer locations={locationList.locations}
+                                            showSuccessAlert={showSuccessAlert}
+                                            setShowSuccessAlert={setShowSuccessAlert}/>
                 </section>
             </div>
         </div>

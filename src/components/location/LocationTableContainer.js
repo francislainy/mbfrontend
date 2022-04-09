@@ -2,8 +2,9 @@ import React, {useEffect} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTrashCan} from "@fortawesome/free-solid-svg-icons";
 import {deleteLocation} from "../../api";
+import CustomAlert from "../CustomAlert";
 
-const LocationRow = ({locations, showSuccessAlert, setShowSuccessAlert}) => {
+const LocationTableContainer = ({locations, showSuccessAlert, setShowSuccessAlert}) => {
 
     useEffect(() => {
             const timeId = setTimeout(() => {
@@ -35,17 +36,9 @@ const LocationRow = ({locations, showSuccessAlert, setShowSuccessAlert}) => {
             })
     }
 
-    function getAlert() { //make it into component
-        return <div className="alert alert-success" role="alert">
-            <span>
-                <strong>Location deleted successfully</strong>
-            </span>
-        </div>;
-    }
-
     return (
         <div>
-            {showSuccessAlert ? getAlert() : null}
+            {showSuccessAlert ? <CustomAlert item={"Location"}/> : null}
             <div className="movieRow--listarea">
                 <table className="table">
                     <thead>
@@ -71,4 +64,4 @@ const LocationRow = ({locations, showSuccessAlert, setShowSuccessAlert}) => {
     )
 }
 
-export default LocationRow;
+export default LocationTableContainer;

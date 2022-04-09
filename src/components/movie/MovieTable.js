@@ -1,59 +1,12 @@
-import React, {useEffect} from 'react';
-import {useNavigate} from "react-router-dom";
-import './MovieRow.css';
+import React from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faTrashCan} from '@fortawesome/free-solid-svg-icons'
-import {deleteMovie} from "../../../api";
+import CustomAlert from "../CustomAlert";
 
-const MovieRow = ({movies, showSuccessAlert, setShowSuccessAlert}) => {
-
-    let navigate = useNavigate();
-
-    const handleClick = (id) => {
-        navigate(`movie/${id}`)
-    }
-
-    useEffect(() => {
-            const timeId = setTimeout(() => {
-                // After 3 seconds set the show value to false
-                setShowSuccessAlert(false)
-            }, 3000)
-
-            return () => {
-                clearTimeout(timeId)
-            }
-        }
-        ,
-        [showSuccessAlert]
-    );
-
-    useEffect(() => {
-        window.scrollTo(0, 0)
-    }, [showSuccessAlert])
-
-    const handleDelete = (e, id) => {
-        e.stopPropagation();
-        const axiosParams = {
-            id: id
-        }
-
-        deleteMovie(axiosParams)
-            .then((response) => {
-                setShowSuccessAlert(true)
-            })
-    }
-
-    function getAlert() {
-        return <div className="alert alert-success" role="alert">
-            <span>
-                <strong>Movie deleted successfully</strong>
-            </span>
-        </div>;
-    }
-
+const MovieTable = ({movies, showSuccessAlert, handleDelete, handleClick}) => {
     return (
         <div>
-            {showSuccessAlert ? getAlert() : null}
+            {showSuccessAlert ? <CustomAlert item={"Movie"}/> : null}
             <div className="movieRow--listarea">
                 <table className="table">
                     <thead>
@@ -80,7 +33,8 @@ const MovieRow = ({movies, showSuccessAlert, setShowSuccessAlert}) => {
                             <td>{`${movie.room.title}`} </td>
                             <td>{`${movie.scene}`} </td>
                             <td>{`${movie.imageUrl}`} </td>
-                            <td><FontAwesomeIcon icon={faTrashCan} onClick={(e) => handleDelete(e, `${movie.id}`)}/></td>
+                            <td><FontAwesomeIcon icon={faTrashCan} onClick={(e) => handleDelete(e, `${movie.id}`)}/>
+                            </td>
                         </tr>
                         </tbody>
                     ))}
@@ -90,4 +44,4 @@ const MovieRow = ({movies, showSuccessAlert, setShowSuccessAlert}) => {
     )
 }
 
-export default MovieRow;
+export default MovieTable;

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import '../../App.css'
 import {getMovies} from "../../api"
-import MovieRow from "./MovieRow/MovieRow";
+import MovieTableContainer from "./MovieTableContainer/MovieTableContainer";
 import CreateNewMovie from "./CreateNewMovie";
 
 const Home = () => {
@@ -53,8 +53,8 @@ const Home = () => {
                 showForm={showForm}
             />
             <section className="lists">
-                <MovieRow movies={movieList.movies} showSuccessAlert={showSuccessAlert}
-                          setShowSuccessAlert={setShowSuccessAlert}/>
+                <MovieTableContainer movies={movieList.movies} showSuccessAlert={showSuccessAlert}
+                                     setShowSuccessAlert={setShowSuccessAlert}/>
             </section>
         </div>
     )

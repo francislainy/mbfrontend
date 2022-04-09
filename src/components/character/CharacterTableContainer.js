@@ -1,9 +1,10 @@
 import React, {useEffect} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTrashCan} from "@fortawesome/free-solid-svg-icons";
-import {deleteActor} from "../../api";
+import {deleteCharacter} from "../../api";
+import CustomAlert from "../CustomAlert";
 
-const ActorRow = ({actors, showSuccessAlert, setShowSuccessAlert}) => {
+const CharacterTableContainer = ({characters, showSuccessAlert, setShowSuccessAlert}) => {
 
     useEffect(() => {
             const timeId = setTimeout(() => {
@@ -29,42 +30,32 @@ const ActorRow = ({actors, showSuccessAlert, setShowSuccessAlert}) => {
             id: id
         }
 
-        deleteActor(axiosParams)
+        deleteCharacter(axiosParams)
             .then((response) => {
                 setShowSuccessAlert(true)
             })
     }
 
-    function getAlert() { //make it into component
-        return <div className="alert alert-success" role="alert">
-            <span>
-                <strong>Actor deleted successfully</strong>
-            </span>
-        </div>;
-    }
-
     return (
         <div>
-            {showSuccessAlert ? getAlert() : null}
+            {showSuccessAlert ? <CustomAlert item={"Character"}/> : null}
             <div className="movieRow--listarea">
                 <table className="table">
                     <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Associated Pinyin Sound</th>
-                        <th>Family</th>
-                        <th>Image Url</th>
-                        <th>Delete actor</th>
+                        <th>Hanzi</th>
+                        <th>Pinyin</th>
+                        <th>Meaning</th>
+                        <th>Delete character</th>
                     </tr>
                     </thead>
-                    {actors.length > 0 && actors.map((actor, key) => (
+                    {characters.length > 0 && characters.map((character, key) => (
                         <tbody className="table-light">
                         <tr style={{cursor: 'pointer'}}>
-                            <td>{`${actor.name}`} </td>
-                            <td>{`${actor.associatedPinyinSound}`} </td>
-                            <td>{`${actor.family}`} </td>
-                            <td>{`${actor.imageUrl}`} </td>
-                            <td><FontAwesomeIcon icon={faTrashCan} onClick={(e) => handleDelete(e, `${actor.id}`)}/>
+                            <td>{`${character.hanzi}`} </td>
+                            <td>{`${character.pinyin}`} </td>
+                            <td>{`${character.meaning}`} </td>
+                            <td><FontAwesomeIcon icon={faTrashCan} onClick={(e) => handleDelete(e, `${character.id}`)}/>
                             </td>
                         </tr>
                         </tbody>
@@ -75,4 +66,4 @@ const ActorRow = ({actors, showSuccessAlert, setShowSuccessAlert}) => {
     )
 }
 
-export default ActorRow;
+export default CharacterTableContainer;
