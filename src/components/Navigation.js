@@ -14,6 +14,9 @@ const Navigation = () => {
                                 <NavLink to="/" className="nav-link">My Movies</NavLink>
                             </li>
                             <li className="nav-item">
+                                <NavLink to="/characters" className="nav-link">Characters</NavLink>
+                            </li>
+                            <li className="nav-item">
                                 <NavLink to={"/actor"} className="nav-link">Actors</NavLink>
                             </li>
                             <li className="nav-item">
@@ -21,6 +24,9 @@ const Navigation = () => {
                             </li>
                             <li className="nav-item">
                                 <NavLink to={"/room"} className="nav-link">Rooms</NavLink>
+                            </li>
+                            <li className="nav-item">
+                                <NavLink to="/" className="nav-link">Flashcards</NavLink>
                             </li>
                         </ul>
                     </div>

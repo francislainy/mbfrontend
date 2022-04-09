@@ -129,3 +129,33 @@ exports.deleteRoom = axiosParams => {
         headers: {Accept: "application/json"},
     })
 }
+
+exports.getCharacters = () => {
+    return axios.request({
+        method: "GET",
+        baseURL: BASE_URL,
+        url: `${BASE_URL}/api/mb/character`,
+        headers: {Accept: "application/json"},
+    })
+}
+
+exports.createCharacter = axiosParams => {
+    const payload = axiosParams.payload
+    return axios.request({
+        method: "POST",
+        baseURL: BASE_URL,
+        url: `${BASE_URL}/api/mb/character`,
+        data: payload,
+        headers: {Accept: "application/json"},
+    })
+}
+
+exports.deleteCharacter = axiosParams => {
+    const id = axiosParams.id
+    return axios.request({
+        method: "DELETE",
+        baseURL: BASE_URL,
+        url: `${BASE_URL}/api/mb/character/${id}`,
+        headers: {Accept: "application/json"},
+    })
+}

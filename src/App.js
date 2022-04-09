@@ -9,9 +9,9 @@ import Navigation from "./components/Navigation";
 import Location from "./components/location/Location";
 import Room from "./components/room/Room";
 import Actor from "./components/actor/Actor";
+import Character from "./components/character/Character";
 
 function App() {
-
     return (
         <div>
             <Router>
@@ -19,6 +19,7 @@ function App() {
                 <Routes>
                     <Route path="/" exact element={<Home/>}/>
                     <Route path="/movie/:id" exact element={<MovieDetail/>}/>
+                    <Route path="/characters" exact element={<Character/>}/>
                     <Route path="/actor" exact element={<Actor/>}/>
                     <Route path="/location" exact element={<Location/>}/>
                     <Route path="/room" exact element={<Room/>}/>
