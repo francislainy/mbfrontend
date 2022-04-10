@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import '../../App.css'
 import {createCharacter} from "../../api"
 import {Button} from "react-bootstrap";
+import CustomAlert from "../CustomAlert";
 
 const CreateNewCharacter = ({showForm, setShowForm}) => {
     const [showNewCharacterButton, setShowNewCharacterButton] = useState(true)
@@ -42,14 +43,6 @@ const CreateNewCharacter = ({showForm, setShowForm}) => {
             })
     }
 
-    function getAlert() {
-        return <div className="alert alert-success" role="alert">
-            <span>
-                <strong>Character created successfully</strong>
-            </span>
-        </div>;
-    }
-
     const handleShowForm = () => {
         setShowForm(true)
         setShowNewCharacterButton(false)
@@ -62,7 +55,7 @@ const CreateNewCharacter = ({showForm, setShowForm}) => {
 
     return (
         <div>
-            {showSuccessAlert ? getAlert() : null}
+            {showSuccessAlert ? <CustomAlert item={"Character"} action={"created"}/> : null}
             <div>
                 <div className="button-container">
                     {showNewCharacterButton &&

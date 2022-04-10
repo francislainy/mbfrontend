@@ -1,9 +1,9 @@
 import React from 'react';
 
-function CustomAlert({item}) { //make it into component
-    return <div className="alert alert-success" role="alert">
+function CustomAlert({item, action}) {
+    return <div className="alert alert-success" style={{marginTop: "16px"}} role="alert">
             <span>
-                <strong>{item} deleted successfully</strong>
+                <strong>{item} {action} successfully</strong>
             </span>
     </div>;
 }

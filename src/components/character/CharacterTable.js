@@ -6,7 +6,7 @@ import CustomAlert from "../CustomAlert";
 const CharacterTable = ({characters, showSuccessAlert, handleDelete}) => {
     return (
         <div>
-            {showSuccessAlert ? <CustomAlert item={"Character"}/> : null}
+            {showSuccessAlert ? <CustomAlert item={"Character"} action={"deleted"}/> : null}
             <div className="movieRow--listarea">
                 <table className="table">
                     <thead>

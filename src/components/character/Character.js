@@ -36,9 +36,10 @@ const Character = () => {
                     showForm={showForm}
                 />
                 <section className="lists">
-                    <CharacterTableContainer characters={characterList.characters}
-                                             showSuccessAlert={showSuccessAlert}
-                                             setShowSuccessAlert={setShowSuccessAlert}/>
+                    <CharacterTableContainer
+                        characters={characterList.characters}
+                        showSuccessAlert={showSuccessAlert}
+                        setShowSuccessAlert={setShowSuccessAlert}/>
                 </section>
             </div>
         </div>

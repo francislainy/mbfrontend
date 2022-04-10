@@ -3,6 +3,7 @@ import '../../App.css'
 import {createMovie} from "../../api"
 import {Button} from "react-bootstrap";
 import NewMovieForm from "./NewMovieForm";
+import CustomAlert from "../CustomAlert";
 
 const CreateNewMovie = ({showForm, setShowForm}) => {
     const [showNewMovieButton, setShowNewMovieButton] = useState(true)
@@ -58,14 +59,6 @@ const CreateNewMovie = ({showForm, setShowForm}) => {
             })
     }
 
-    function getAlert() {
-        return <div className="alert alert-success" role="alert">
-            <span>
-                <strong>Movie created successfully</strong>
-            </span>
-        </div>;
-    }
-
     const handleShowForm = () => {
         setShowForm(true)
         setShowNewMovieButton(false)
@@ -78,7 +71,7 @@ const CreateNewMovie = ({showForm, setShowForm}) => {
 
     return (
         <div>
-            {showSuccessAlert ? getAlert() : null}
+            {showSuccessAlert ? <CustomAlert item={"Movie"} action={"created"}/> : null}
             <div>
                 <div className="button-container">
                     {showNewMovieButton && <Button className="new-movie-button shadow-none" onClick={handleShowForm}>New

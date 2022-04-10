@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import '../../App.css'
 import {createLocation} from "../../api"
 import {Button} from "react-bootstrap";
+import CustomAlert from "../CustomAlert";
 
 const CreateNewLocation = ({showForm, setShowForm}) => {
     const [showNewLocationButton, setShowNewLocationButton] = useState(true)
@@ -41,14 +42,6 @@ const CreateNewLocation = ({showForm, setShowForm}) => {
             })
     }
 
-    function getAlert() {
-        return <div className="alert alert-success" role="alert">
-            <span>
-                <strong>Location created successfully</strong>
-            </span>
-        </div>;
-    }
-
     const handleShowForm = () => {
         setShowForm(true)
         setShowNewLocationButton(false)
@@ -61,7 +54,7 @@ const CreateNewLocation = ({showForm, setShowForm}) => {
 
     return (
         <div>
-            {showSuccessAlert ? getAlert() : null}
+            {showSuccessAlert ? <CustomAlert item={"Location"} action={"created"}/> : null}
             <div>
                 <div className="button-container">
                     {showNewLocationButton && <Button className="new-movie-button shadow-none" onClick={handleShowForm}>New

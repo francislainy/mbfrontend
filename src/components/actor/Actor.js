@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import {getActors} from "../../api";
-import LocationTableContainer from "../location/LocationTableContainer";
 import CreateNewActor from "./CreateNewActor";
 import ActorTableContainer from "./ActorTableContainer";
 
@@ -36,9 +35,10 @@ const Actor = () => {
                     showForm={showForm}
                 />
                 <section className="lists">
-                    <ActorTableContainer actors={actorList.actors}
-                                         showSuccessAlert={showSuccessAlert}
-                                         setShowSuccessAlert={setShowSuccessAlert}/>
+                    <ActorTableContainer
+                        actors={actorList.actors}
+                        showSuccessAlert={showSuccessAlert}
+                        setShowSuccessAlert={setShowSuccessAlert}/>
                 </section>
             </div>
         </div>
