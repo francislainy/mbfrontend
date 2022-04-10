@@ -28,10 +28,10 @@ const MovieTable = ({movies, showSuccessAlert, handleDelete, handleClick}) => {
                             <td>{`${movie.character.pinyin}`} </td>
                             <td>{`${movie.character.hanzi}`} </td>
                             <td>{`${movie.character.meaning}`} </td>
-                            <td>{`${movie.actor.name}`} </td>
-                            <td>{`${movie.location.title}`} </td>
-                            <td>{`${movie.room.title}`} </td>
-                            <td>{`${movie.scene}`} </td>
+                            <td>{movie.actor ? `${movie.actor.name}` : "undefined"} </td>
+                            <td>{movie.location ? `${movie.location.title}` : "undefined"} </td>
+                            <td>{movie.room ? `${movie.room.title}` : "undefined"} </td>
+                            <td>{movie.scene ? `${movie.scene}` : "undefined"} </td>
                             <td>{`${movie.imageUrl}`} </td>
                             <td><FontAwesomeIcon icon={faTrashCan} onClick={(e) => handleDelete(e, `${movie.id}`)}/>
                             </td>
