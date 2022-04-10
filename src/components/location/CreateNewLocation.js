@@ -7,6 +7,7 @@ import CustomAlert from "../CustomAlert";
 const CreateNewLocation = ({showForm, setShowForm}) => {
     const [showNewLocationButton, setShowNewLocationButton] = useState(true)
     const [showSuccessAlert, setShowSuccessAlert] = useState(false)
+    const [error, setError] = useState(false)
 
     useEffect(() => {
             const timeId = setTimeout(() => {
@@ -19,7 +20,7 @@ const CreateNewLocation = ({showForm, setShowForm}) => {
             }
         }
         ,
-        [showForm]
+        [showForm, error]
     );
 
     function handleSubmit(e) {
@@ -40,6 +41,11 @@ const CreateNewLocation = ({showForm, setShowForm}) => {
                 setShowForm(false)
                 setShowNewLocationButton(true)
             })
+            .catch((response) => {
+                    setShowSuccessAlert(true)
+                    setError(true)
+                }
+            )
     }
 
     const handleShowForm = () => {
@@ -54,7 +60,7 @@ const CreateNewLocation = ({showForm, setShowForm}) => {
 
     return (
         <div>
-            {showSuccessAlert ? <CustomAlert item={"Location"} action={"created"}/> : null}
+            {showSuccessAlert ? <CustomAlert item={"Location"} action={"created"} error={error}/> : null}
             <div>
                 <div className="button-container">
                     {showNewLocationButton && <Button className="new-movie-button shadow-none" onClick={handleShowForm}>New

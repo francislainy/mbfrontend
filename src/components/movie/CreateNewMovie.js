@@ -11,6 +11,7 @@ const CreateNewMovie = ({showForm, setShowForm}) => {
     const [selectedActorId, selectActorId] = useState(null);
     const [selectedLocationId, selectLocationId] = useState(null);
     const [selectedRoomId, selectRoomId] = useState(null);
+    const [error, setError] = useState(false)
 
     useEffect(() => {
             const timeId = setTimeout(() => {
@@ -21,9 +22,8 @@ const CreateNewMovie = ({showForm, setShowForm}) => {
             return () => {
                 clearTimeout(timeId)
             }
-        }
-        ,
-        [showForm]
+        },
+        [showForm, error]
     );
 
     function handleSubmit(e) {
@@ -53,10 +53,16 @@ const CreateNewMovie = ({showForm, setShowForm}) => {
 
         createMovie(axiosParams)
             .then((response) => {
+                setError(false)
                 setShowSuccessAlert(true)
                 setShowForm(false)
                 setShowNewMovieButton(true)
             })
+            .catch((response) => {
+                    setShowSuccessAlert(true)
+                    setError(true)
+                }
+            )
     }
 
     const handleShowForm = () => {
@@ -71,7 +77,7 @@ const CreateNewMovie = ({showForm, setShowForm}) => {
 
     return (
         <div>
-            {showSuccessAlert ? <CustomAlert item={"Movie"} action={"created"}/> : null}
+            {showSuccessAlert ? <CustomAlert item={"Movie"} action={"created"} error={error}/> : null}
             <div>
                 <div className="button-container">
                     {showNewMovieButton && <Button className="new-movie-button shadow-none" onClick={handleShowForm}>New
@@ -87,6 +93,7 @@ const CreateNewMovie = ({showForm, setShowForm}) => {
                             </div>
                             <h2 style={{color: "#AAA"}}>Create new movie</h2>
                             <NewMovieForm
+                                showForm={showForm}
                                 selectActorId={selectActorId}
                                 selectedActorId={selectedActorId}
                                 selectedLocationId={selectedLocationId}

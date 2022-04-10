@@ -7,6 +7,7 @@ import CustomAlert from "../CustomAlert";
 const CreateNewRoom = ({showForm, setShowForm}) => {
     const [showNewRoomButton, setShowNewRoomButton] = useState(true)
     const [showSuccessAlert, setShowSuccessAlert] = useState(false)
+    const [error, setError] = useState(false)
 
     useEffect(() => {
             const timeId = setTimeout(() => {
@@ -19,7 +20,7 @@ const CreateNewRoom = ({showForm, setShowForm}) => {
             }
         }
         ,
-        [showForm]
+        [showForm, error]
     );
 
     function handleSubmit(e) {
@@ -35,10 +36,16 @@ const CreateNewRoom = ({showForm, setShowForm}) => {
 
         createRoom(axiosParams)
             .then((response) => {
+                setError(false)
                 setShowSuccessAlert(true)
                 setShowForm(false)
                 setShowNewRoomButton(true)
             })
+            .catch((response) => {
+                    setShowSuccessAlert(true)
+                    setError(true)
+                }
+            )
     }
 
     const handleShowForm = () => {
@@ -53,7 +60,7 @@ const CreateNewRoom = ({showForm, setShowForm}) => {
 
     return (
         <div>
-            {showSuccessAlert ? <CustomAlert item={"Room"} action={"created"}/> : null}
+            {showSuccessAlert ? <CustomAlert item={"Room"} action={"created"} error={error}/> : null}
             <div>
                 <div className="button-container">
                     {showNewRoomButton && <Button className="new-movie-button shadow-none" onClick={handleShowForm}>New

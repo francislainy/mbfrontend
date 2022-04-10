@@ -53,8 +53,10 @@ const Home = () => {
                 showForm={showForm}
             />
             <section className="lists">
-                <MovieTableContainer movies={movieList.movies} showSuccessAlert={showSuccessAlert}
-                                     setShowSuccessAlert={setShowSuccessAlert}/>
+                <MovieTableContainer
+                    movies={movieList.movies}
+                    showSuccessAlert={showSuccessAlert}
+                    setShowSuccessAlert={setShowSuccessAlert}/>
             </section>
         </div>
     )

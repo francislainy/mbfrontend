@@ -3,7 +3,15 @@ import DropdownSelectWithName from "../DropdownSelectWithName";
 import DropdownSelectWithTitle from "../DropdownSelectWithTitle";
 import {getActors, getLocations, getRooms} from "../../api";
 
-const NewMovieForm = ({ selectActorId, selectedActorId, selectLocationId, selectedLocationId, selectRoomId, selectedRoomId }) => {
+const NewMovieForm = ({
+                          showForm,
+                          selectActorId,
+                          selectedActorId,
+                          selectLocationId,
+                          selectedLocationId,
+                          selectRoomId,
+                          selectedRoomId
+                      }) => {
 
     const [actorList, setActorList] = useState({
         actors: [
@@ -42,7 +50,7 @@ const NewMovieForm = ({ selectActorId, selectedActorId, selectLocationId, select
         }
 
         loadAll().then(r => console.log(r));
-    }, []);
+    }, [showForm]);
 
     useEffect(() => {
         const loadAll = async () => {
@@ -54,7 +62,7 @@ const NewMovieForm = ({ selectActorId, selectedActorId, selectLocationId, select
         }
 
         loadAll().then(r => console.log(r));
-    }, [])
+    }, [showForm])
 
     useEffect(() => {
         const loadAll = async () => {
@@ -66,7 +74,7 @@ const NewMovieForm = ({ selectActorId, selectedActorId, selectLocationId, select
         }
 
         loadAll().then(r => console.log(r));
-    }, []);
+    }, [showForm]);
 
     return (
         <div>
@@ -111,8 +119,8 @@ const NewMovieForm = ({ selectActorId, selectedActorId, selectLocationId, select
                     </div>
                 </div>
                 <div className="mb-2 col-12">
-                                <textarea className="form-control" name="scene" placeholder="Scene"
-                                          rows="14"></textarea>
+                     <textarea className="form-control" name="scene" placeholder="Scene"
+                               rows="14"/>
                 </div>
             </div>
         </div>

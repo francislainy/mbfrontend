@@ -7,6 +7,7 @@ import CustomAlert from "../CustomAlert";
 const CreateNewCharacter = ({showForm, setShowForm}) => {
     const [showNewCharacterButton, setShowNewCharacterButton] = useState(true)
     const [showSuccessAlert, setShowSuccessAlert] = useState(false)
+    const [error, setError] = useState(false)
 
     useEffect(() => {
             const timeId = setTimeout(() => {
@@ -19,7 +20,7 @@ const CreateNewCharacter = ({showForm, setShowForm}) => {
             }
         }
         ,
-        [showForm]
+        [showForm, error]
     );
 
     function handleSubmit(e) {
@@ -37,10 +38,16 @@ const CreateNewCharacter = ({showForm, setShowForm}) => {
 
         createCharacter(axiosParams)
             .then((response) => {
+                setError(false)
                 setShowSuccessAlert(true)
                 setShowForm(false)
                 setShowNewCharacterButton(true)
             })
+            .catch((response) => {
+                    setShowSuccessAlert(true)
+                    setError(true)
+                }
+            )
     }
 
     const handleShowForm = () => {
@@ -55,7 +62,7 @@ const CreateNewCharacter = ({showForm, setShowForm}) => {
 
     return (
         <div>
-            {showSuccessAlert ? <CustomAlert item={"Character"} action={"created"}/> : null}
+            {showSuccessAlert ? <CustomAlert item={"Character"} action={"created"} error={error}/> : null}
             <div>
                 <div className="button-container">
                     {showNewCharacterButton &&
