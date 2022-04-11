@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useParams} from "react-router-dom";
-import {getActors, getLocations, getMovie, getRooms} from "../../../api";
+import {getActors, getLocations, getMovie, getRooms, updateMovie} from "../../../api";
 import {Button} from "react-bootstrap";
 import './MovieDetail.css'
 import DropdownSelectWithTitle from "../../DropdownSelectWithTitle";
@@ -96,6 +96,38 @@ const MovieDetail = () => {
         loadAll().then(r => console.log(r));
     }, []);
 
+    const handleSave = (id) => {
+        let values = {
+            character: {
+                id: data.character.id,
+                hanzi: data.character.hanzi,
+                pinyin: data.character.pinyin,
+                meaning: data.character.meaning,
+            },
+            actor: {
+                id: selectedActorId,
+            },
+            location: {
+                id: selectedLocationId,
+            },
+            room: {
+                id: selectedRoomId,
+            },
+            scene: data.scene,
+        }
+
+        const axiosParams = {
+            id,
+            payload: values
+        }
+
+        try {
+            updateMovie(axiosParams).then(response => setLocationList(response.data))
+        } catch (e) {
+            console.log(e + "error")
+        }
+    }
+
     return (
         <div>
             {data &&
@@ -144,7 +176,8 @@ const MovieDetail = () => {
                                 </div>
                             </div>
                             <div style={{marginTop: "16px"}}>
-                                <Button className="btn-primary" style={{marginRight: "56px"}}>Save</Button>
+                                <Button className="btn-primary" style={{marginRight: "56px"}}
+                                        onClick={() => handleSave(`${id}`)}>Save</Button>
                                 <Button className="btn-danger">Delete Movie</Button>
                             </div>
                         </div>

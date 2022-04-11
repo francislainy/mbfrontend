@@ -40,6 +40,18 @@ exports.deleteMovie = axiosParams => {
     })
 }
 
+exports.updateMovie = axiosParams => {
+    const id = axiosParams.id
+    const payload = axiosParams.payload
+    return axios.request({
+        method: "PUT",
+        baseURL: BASE_URL,
+        url: `${BASE_URL}/api/mb/movie/${id}`,
+        data: payload,
+        headers: {Accept: "application/json"},
+    })
+}
+
 exports.getActors = () => {
     return axios.request({
         method: "GET",
