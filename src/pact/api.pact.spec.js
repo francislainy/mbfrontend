@@ -24,7 +24,7 @@ describe('API Pact test', () => {
                 uponReceiving: 'a request to get all locations',
                 withRequest: {
                     method: 'GET',
-                    path: '/api/mb/location',
+                    path: '/api/mb/location/',
                     // headers: {
                     //     Authorization: like('Bearer 2019-01-14T11:34:18.045Z'),
                     // },
