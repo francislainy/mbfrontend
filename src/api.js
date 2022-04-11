@@ -82,10 +82,10 @@ exports.deleteActor = axiosParams => {
     })
 }
 
-exports.getLocations = () => {
+exports.getLocations = (baseUrl = BASE_URL) => {
     return axios.request({
         method: "GET",
-        baseURL: BASE_URL,
+        baseURL: baseUrl,
         url: `${BASE_URL}/api/mb/location`,
         headers: {Accept: "application/json"},
     })

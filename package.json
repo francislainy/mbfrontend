@@ -42,5 +42,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "jest-pact": "^0.9.3",
+    "@pact-foundation/pact": "^9.17.2",
+    "@pact-foundation/pact-node": "^10.17.1"
   }
 }
