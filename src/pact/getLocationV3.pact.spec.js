@@ -4,15 +4,13 @@ const {expect} = require('chai');
 const {getLocation} = require("../api");
 const {string, fromProviderState} = MatchersV3;
 
-describe('Transaction service - create a new transaction for an account', () => {
+describe('Retrieve a location', () => {
     const provider = new PactV3({
-        consumer: 'TransactionService',
-        provider: 'AccountService',
+        consumer: 'mbfrontend',
+        provider: 'mbbackend',
         logLevel: 'trace',
         dir: path.resolve(process.cwd(), 'pacts'),
     });
-
-    const id = "anyId"
 
     it('queries the account service for the account details', () => {
         provider
@@ -20,10 +18,7 @@ describe('Transaction service - create a new transaction for an account', () => 
             .uponReceiving('a request to get the account details')
             .withRequest({
                 method: 'GET',
-                // path: '/api/mb/location/id',
-                // path:  {'/api/mb/location/id': fromProviderState('${id}', '100')},
                 path: fromProviderState('/api/mb/location/${id}', '/api/mb/location/100'),
-                // query: {id: fromProviderState('${id}', '100')}, //this should be appended to the path instead
                 headers: {Accept: 'application/json'},
             })
             .willRespondWith({
@@ -43,10 +38,3 @@ describe('Transaction service - create a new transaction for an account', () => 
 
     });
 });
-
-// const locations = await axiosClient.request({
-//     method: "GET",
-//     url: `/mb/location/1bfff94a-b70e-4b39-bd2a-be1c0f898589`,
-//     headers: {Accept: "application/json"},
-// });
-// console.log("## locations", locations);

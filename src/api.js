@@ -91,11 +91,11 @@ exports.getLocations = (baseUrl = BASE_URL) => {
     })
 }
 
-exports.getLocation = (basiUrl = BASE_URL, id) => {
+exports.getLocation = (baseUrl = BASE_URL, id) => {
     return axios.request({
         method: "GET",
-        baseURL: BASE_URL,
-        url: `${BASE_URL}/api/mb/location/${id}`,
+        baseURL: baseUrl,
+        url: `${baseUrl}/api/mb/location/${id}`,
         headers: {Accept: "application/json"},
     })
 }
