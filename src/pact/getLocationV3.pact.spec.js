@@ -14,12 +14,12 @@ describe('Transaction service - create a new transaction for an account', () => 
 
     it('queries the account service for the account details', () => {
         provider
-            .given('Account Test001 exists', {accountRef: 'Test001'})
+            .given('Account Test001 exists')
             .uponReceiving('a request to get the account details')
             .withRequest({
                 method: 'GET',
-                path: '/api/mb/location/findOneById',
-                query: {locationId: fromProviderState('${id}', '100')},
+                path: '/api/mb/location/id',
+                query: {id: fromProviderState('${id}', '100')}, //this should be appended to the path instead
                 headers: {Accept: 'application/hal+json'},
             })
             .willRespondWith({
@@ -31,11 +31,23 @@ describe('Transaction service - create a new transaction for an account', () => 
             });
 
         return provider.executeTest(async (mockserver) => {
-            await getLocation(mockserver.url);
-            return getLocation()
+            // return getLocation(mockserver.url, '100')
+            //     .then((result) => {
+            //         expect(result.title).to.equal('Test');
+            //     });
+
+            return getLocation(mockserver.url, '100')
                 .then((result) => {
                     expect(result.title).to.equal('Test');
                 });
         });
+
     });
 });
+
+// const locations = await axiosClient.request({
+//     method: "GET",
+//     url: `/mb/location/1bfff94a-b70e-4b39-bd2a-be1c0f898589`,
+//     headers: {Accept: "application/json"},
+// });
+// console.log("## locations", locations);
