@@ -4,6 +4,8 @@ const {expect} = require('chai');
 const {getLocation} = require("../api");
 const {string, fromProviderState} = MatchersV3;
 
+
+
 describe('Transaction service - create a new transaction for an account', () => {
     const provider = new PactV3({
         consumer: 'TransactionService',
@@ -12,14 +14,18 @@ describe('Transaction service - create a new transaction for an account', () => 
         dir: path.resolve(process.cwd(), 'pacts'),
     });
 
+    const id = "anyId"
+
     it('queries the account service for the account details', () => {
         provider
             .given('Account Test001 exists')
             .uponReceiving('a request to get the account details')
             .withRequest({
                 method: 'GET',
-                path: '/api/mb/location/id',
-                query: {id: fromProviderState('${id}', '100')}, //this should be appended to the path instead
+                // path: '/api/mb/location/id',
+                // path:  {'/api/mb/location/id': fromProviderState('${id}', '100')},
+                path: fromProviderState('/api/mb/location/${id}', '/api/mb/location/100'),
+                // query: {id: fromProviderState('${id}', '100')}, //this should be appended to the path instead
                 headers: {Accept: 'application/hal+json'},
             })
             .willRespondWith({
@@ -31,11 +37,6 @@ describe('Transaction service - create a new transaction for an account', () => 
             });
 
         return provider.executeTest(async (mockserver) => {
-            // return getLocation(mockserver.url, '100')
-            //     .then((result) => {
-            //         expect(result.title).to.equal('Test');
-            //     });
-
             return getLocation(mockserver.url, '100')
                 .then((result) => {
                     expect(result.title).to.equal('Test');
