@@ -4,8 +4,6 @@ const {expect} = require('chai');
 const {getLocation} = require("../api");
 const {string, fromProviderState} = MatchersV3;
 
-
-
 describe('Transaction service - create a new transaction for an account', () => {
     const provider = new PactV3({
         consumer: 'TransactionService',
@@ -26,11 +24,11 @@ describe('Transaction service - create a new transaction for an account', () => 
                 // path:  {'/api/mb/location/id': fromProviderState('${id}', '100')},
                 path: fromProviderState('/api/mb/location/${id}', '/api/mb/location/100'),
                 // query: {id: fromProviderState('${id}', '100')}, //this should be appended to the path instead
-                headers: {Accept: 'application/hal+json'},
+                headers: {Accept: 'application/json'},
             })
             .willRespondWith({
                 status: 200,
-                headers: {'Content-Type': 'application/hal+json'},
+                headers: {'Content-Type': 'application/json'},
                 body: {
                     title: string('Test'),
                 },
