@@ -1,9 +1,7 @@
 import {Pact} from '@pact-foundation/pact';
 
-
-import {Matchers} from '@pact-foundation/pact';
-
-const {eachLike, regex} = Matchers;
+const {PactV3, MatchersV3, XmlBuilder} = require('@pact-foundation/pact/v3');
+const {regex, eachLike, fromProviderState} = MatchersV3;
 
 const axios = require("axios");
 axios.defaults.baseURL = "http://127.0.0.1:9999";
@@ -14,10 +12,10 @@ const axiosClient = axios.create({
 
 const mockProvider = new Pact({
     port,
-    consumer: "pactflow-example-consumer",
+    consumer: "mbfrontend",
     provider: process.env.PACT_PROVIDER
         ? process.env.PACT_PROVIDER
-        : "pactflow-example-provider",
+        : "mbbackend",
     cors: true,
 });
 
@@ -26,17 +24,18 @@ describe('API Pact test', () => {
     afterEach(() => mockProvider.verify());
     afterAll(() => mockProvider.finalize());
 
-    describe('retrieving locations', () => {
+    describe('retrieving a location', () => {
         test('location exists', async () => {
             // set up Pact interactions
             const expectedLocation = {id: '10', title: 'a title'}
 
             await mockProvider.addInteraction({
-                state: 'locations exist',
-                uponReceiving: 'a request to get all locations',
+                state: 'location exist',
+                uponReceiving: 'a request to get a location',
                 withRequest: {
                     method: 'GET',
-                    path: '/api/mb/location/',
+                    path: '/api/mb/location/1bfff94a-b70e-4b39-bd2a-be1c0f898589',
+                    query: {accountNumber: fromProviderState('${accountNumber}', '1bfff94a-b70e-4b39-bd2a-be1c0f898589')},
                     // headers: {
                     //     Authorization: like('Bearer 2019-01-14T11:34:18.045Z'),
                     // },
@@ -55,8 +54,8 @@ describe('API Pact test', () => {
 
             const locations = await axiosClient.request({
                 method: "GET",
-                url: `/mb/location/`,
-                headers: { Accept: "application/json" },
+                url: `/mb/location/1bfff94a-b70e-4b39-bd2a-be1c0f898589`,
+                headers: {Accept: "application/json"},
             });
             console.log("## locations", locations);
 
