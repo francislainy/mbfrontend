@@ -18,8 +18,8 @@ describe('Transaction service - create a new transaction for an account', () => 
             .uponReceiving('a request to get the account details')
             .withRequest({
                 method: 'GET',
-                path: '/accounts/search/findOneByAccountNumberId',
-                query: {accountNumber: fromProviderState('${accountNumber}', '100')},
+                path: '/api/mb/location/findOneByLocationId',
+                query: {locationId: fromProviderState('${locationId}', '100')},
                 headers: {Accept: 'application/hal+json'},
             })
             .willRespondWith({
