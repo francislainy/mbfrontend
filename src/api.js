@@ -91,6 +91,15 @@ exports.getLocations = (baseUrl = BASE_URL) => {
     })
 }
 
+exports.getLocation = (basiUrl = BASE_URL, id) => {
+    return axios.request({
+        method: "GET",
+        baseURL: BASE_URL,
+        url: `${BASE_URL}/api/mb/location/${id}`,
+        headers: {Accept: "application/json"},
+    })
+}
+
 exports.createLocation = axiosParams => {
     const payload = axiosParams.payload
     return axios.request({

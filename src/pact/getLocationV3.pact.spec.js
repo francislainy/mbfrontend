@@ -1,7 +1,7 @@
 const path = require('path');
 const {PactV3, MatchersV3} = require('@pact-foundation/pact/v3');
 const {expect} = require('chai');
-const {getLocations} = require("../api");
+const {getLocation} = require("../api");
 const {string, fromProviderState} = MatchersV3;
 
 describe('Transaction service - create a new transaction for an account', () => {
@@ -18,8 +18,8 @@ describe('Transaction service - create a new transaction for an account', () => 
             .uponReceiving('a request to get the account details')
             .withRequest({
                 method: 'GET',
-                path: '/api/mb/location/findOneByLocationId',
-                query: {locationId: fromProviderState('${locationId}', '100')},
+                path: '/api/mb/location/findOneById',
+                query: {locationId: fromProviderState('${id}', '100')},
                 headers: {Accept: 'application/hal+json'},
             })
             .willRespondWith({
@@ -31,19 +31,11 @@ describe('Transaction service - create a new transaction for an account', () => 
             });
 
         return provider.executeTest(async (mockserver) => {
-            await getLocations(mockserver.url);
-            return getLocations()
+            await getLocation(mockserver.url);
+            return getLocation()
                 .then((result) => {
                     expect(result.title).to.equal('Test');
                 });
         });
     });
 });
-
-
-// const locations = await axiosClient.request({
-//             //     method: "GET",
-//             //     url: `/mb/location/1bfff94a-b70e-4b39-bd2a-be1c0f898589`,
-//             //     headers: {Accept: "application/json"},
-//             // });
-//             // console.log("## locations", locations);
