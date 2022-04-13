@@ -12,10 +12,10 @@ describe('Retrieve a location', () => {
         dir: path.resolve(process.cwd(), 'pacts'),
     });
 
-    it('queries the account service for the account details', () => {
+    it('queries the backend service for the location details', () => {
         provider
-            .given('Account Test001 exists')
-            .uponReceiving('a request to get the account details')
+            .given('A location exist with a matching id exists')
+            .uponReceiving('a request to get the location details')
             .withRequest({
                 method: 'GET',
                 path: fromProviderState('/api/mb/location/${id}', '/api/mb/location/100'),
@@ -32,6 +32,7 @@ describe('Retrieve a location', () => {
         return provider.executeTest(async (mockserver) => {
             return getLocation(mockserver.url, '100')
                 .then((result) => {
+                    expect(result.status).to.equal(200);
                     expect(result.title).to.equal('Test');
                 });
         });
