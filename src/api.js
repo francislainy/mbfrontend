@@ -111,12 +111,20 @@ exports.createLocation = axiosParams => {
     })
 }
 
-exports.deleteLocation = axiosParams => {
-    const id = axiosParams.id
+exports.deleteLocation = (baseUrl = BASE_URL, id) => {
     return axios.request({
         method: "DELETE",
-        baseURL: BASE_URL,
-        url: `${BASE_URL}/api/mb/location/${id}`,
+        baseURL: baseUrl,
+        url: `${baseUrl}/api/mb/location/${id}`,
+        headers: {Accept: "application/json"},
+    })
+}
+
+exports.deleteCourseWorkApi = (baseUrl = BASE_URL) => {
+    return axios.request({
+        method: "POST",
+        baseURL: baseUrl,
+        url: `${baseUrl}/passthrough`,
         headers: {Accept: "application/json"},
     })
 }
