@@ -23,7 +23,7 @@ const MovieTable = ({movies, showSuccessAlert, handleDelete, handleClick}) => {
                     </tr>
                     </thead>
                     {movies.length > 0 && movies.map((movie, key) => (
-                        <tbody className="table-light">
+                        <tbody className="table-light" key={key}>
                         <tr style={{cursor: 'pointer'}} onClick={() => handleClick(`${movie.id}`)}>
                             <td>{`${movie.character.pinyin}`} </td>
                             <td>{`${movie.character.hanzi}`} </td>

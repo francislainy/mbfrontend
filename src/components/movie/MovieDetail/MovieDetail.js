@@ -6,21 +6,36 @@ import './MovieDetail.css'
 import DropdownSelectWithTitle from "../../DropdownSelectWithTitle";
 import sample_movie from './sample_movie.jpeg';
 import DropdownSelectWithName from "../../DropdownSelectWithName";
+import CustomAlert from "../../CustomAlert";
 
 const MovieDetail = () => {
 
     const {id} = useParams();
 
-    const [data, setData] = useState()
+    const [movie, setMovie] = useState()
     const [selectedActorId, selectActorId] = useState(null);
     const [selectedLocationId, selectLocationId] = useState(null);
     const [selectedRoomId, selectRoomId] = useState(null);
+    const [showSuccessAlert, setShowSuccessAlert] = useState(false)
+
+    useEffect(() => {
+            const timeId = setTimeout(() => {
+                // After 3 seconds set the show value to false
+                setShowSuccessAlert(false)
+            }, 3000)
+
+            return () => {
+                clearTimeout(timeId)
+            }
+        },
+        [movie]
+    );
 
     useEffect(() => {
         const loadAll = async () => {
             try {
                 getMovie(id).then(response => {
-                    setData(response.data)
+                    setMovie(response.data)
                     selectActorId(response.data.actor.id)
                     selectLocationId(response.data.location.id)
                     selectRoomId(response.data.room.id)
@@ -30,7 +45,7 @@ const MovieDetail = () => {
             }
         }
 
-        loadAll().then(r => console.log(r));
+        loadAll().then();
     }, [])
 
     const [actorList, setActorList] = useState({
@@ -96,13 +111,13 @@ const MovieDetail = () => {
         loadAll().then(r => console.log(r));
     }, []);
 
-    const handleSave = (id) => {
+    const handleSave = () => {
         let values = {
             character: {
-                id: data.character.id,
-                hanzi: data.character.hanzi,
-                pinyin: data.character.pinyin,
-                meaning: data.character.meaning,
+                id: movie.character.id,
+                hanzi: movie.character.hanzi,
+                pinyin: movie.character.pinyin,
+                meaning: movie.character.meaning,
             },
             actor: {
                 id: selectedActorId,
@@ -113,7 +128,7 @@ const MovieDetail = () => {
             room: {
                 id: selectedRoomId,
             },
-            scene: data.scene,
+            scene: movie.scene,
         }
 
         const axiosParams = {
@@ -122,7 +137,12 @@ const MovieDetail = () => {
         }
 
         try {
-            updateMovie(axiosParams).then(response => setLocationList(response.data))
+            updateMovie(axiosParams).then(response => {
+                    setMovie(response.data)
+                    setShowSuccessAlert(true)
+                }
+            )
+
         } catch (e) {
             console.log(e + "error")
         }
@@ -130,8 +150,9 @@ const MovieDetail = () => {
 
     return (
         <div>
-            {data &&
+            {movie &&
             <div className="container" style={{background: "![](../../../sample_movie.jpeg)"}}>
+                {showSuccessAlert ? <CustomAlert item={"Movie"} action={"updated"} error={null}/> : null}
                 <div className="row" style={{marginTop: "15px"}}>
                     <div style={{textAlign: "end"}}>
                         <Button>See on Mandarin Blueprint</Button>
@@ -140,13 +161,15 @@ const MovieDetail = () => {
                         <div className="row">
                             <div className="col-6">
                                 <div style={{marginTop: "60px", alignItems: "center"}}>
-                                    <p style={{textAlign: "center", fontSize: "70px"}}>{data.character.pinyin}</p>
+                                    <p style={{textAlign: "center", fontSize: "70px"}}>{movie.character.pinyin}</p>
                                     <h1 style={{
                                         textAlign: "center",
                                         fontSize: "300px",
                                         marginTop: "-50px"
-                                    }}>{data.character.hanzi}</h1>
-                                    <textarea rows={4} cols={64}/>
+                                    }}>{movie.character.hanzi}</h1>
+                                    <textarea rows={4} cols={64}>
+                                        {movie.scene}
+                                    </textarea>
                                 </div>
                             </div>
                             <div className="col-6" style={{marginTop: "170px", width: "30%", height: "100px"}}>
@@ -177,7 +200,7 @@ const MovieDetail = () => {
                             </div>
                             <div style={{marginTop: "16px"}}>
                                 <Button className="btn-primary" style={{marginRight: "56px"}}
-                                        onClick={() => handleSave(`${id}`)}>Save</Button>
+                                        onClick={handleSave}>Save</Button>
                                 <Button className="btn-danger">Delete Movie</Button>
                             </div>
                         </div>
