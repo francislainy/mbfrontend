@@ -1,13 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import '../../App.css'
 import {createActor} from "../../api"
-import {Button} from "react-bootstrap";
+import {Button, Dropdown, DropdownButton} from "react-bootstrap";
 import CustomAlert from "../CustomAlert";
 
 const CreateNewActor = ({showForm, setShowForm}) => {
     const [showNewActorButton, setShowNewActorButton] = useState(true)
     const [showSuccessAlert, setShowSuccessAlert] = useState(false)
     const [error, setError] = useState(false)
+    const [selectedFamily, setSelectedFamily] = useState("Select family")
 
     useEffect(() => {
             const timeId = setTimeout(() => {
@@ -24,11 +25,11 @@ const CreateNewActor = ({showForm, setShowForm}) => {
 
     function handleSubmit(e) {
         e.preventDefault()
-        const {name, associatedPinyinSound, family, imageUrl} = e.target
+        const {name, associatedPinyinSound, imageUrl} = e.target
         let values = {
             name: name.value,
             associatedPinyinSound: associatedPinyinSound.value,
-            family: family.value,
+            family: selectedFamily,
             imageUrl: imageUrl.value,
         }
 
@@ -60,6 +61,10 @@ const CreateNewActor = ({showForm, setShowForm}) => {
         setShowNewActorButton(true)
     }
 
+    const handleFamilyClick = (e) => {
+        setSelectedFamily(e.target.textContent)
+    }
+
     return (
         <div>
             {showSuccessAlert ? <CustomAlert item={"Actor"} action={"created"} error={error}/> : null}
@@ -77,7 +82,7 @@ const CreateNewActor = ({showForm, setShowForm}) => {
                                         onClick={handleHideForm}>X</Button>
                             </div>
                             <h2 style={{color: "#AAA"}}>Create new actor</h2>
-                            <div className="row">
+                            <div className="row" style={{alignItems: "flex-end"}}>
                                 <div className="mb-2 col-2">
                                     <input className="form-control" type="text" name="name"
                                            placeholder="Name"/>
@@ -87,8 +92,15 @@ const CreateNewActor = ({showForm, setShowForm}) => {
                                            placeholder="Associated Pinyin Sound"/>
                                 </div>
                                 <div className="mb-2 col-2">
-                                    <input className="form-control" type="text" name="family"
-                                           placeholder="Family"/>
+                                    {/*<input className="form-control" type="text" name="family"*/}
+                                    {/*       placeholder="Family"/>*/}
+                                    <DropdownButton
+                                        variant="custom" title={selectedFamily}>
+                                        <Dropdown.Item onClick={handleFamilyClick}>FEMALE</Dropdown.Item>
+                                        <Dropdown.Item onClick={handleFamilyClick}>MALE</Dropdown.Item>
+                                        <Dropdown.Item onClick={handleFamilyClick}>GOD</Dropdown.Item>
+                                        <Dropdown.Item onClick={handleFamilyClick}>FICTIONAL</Dropdown.Item>
+                                    </DropdownButton>
                                 </div>
                                 <div className="mb-2 col-2">
                                     <input className="form-control" type="text" name="imageUrl"
