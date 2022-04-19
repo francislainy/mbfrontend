@@ -62,7 +62,7 @@ const CreateNewActor = ({showForm, setShowForm}) => {
 
     return (
         <div>
-            {showSuccessAlert ? <CustomAlert item={"Movie"} action={"created"} error={error}/> : null}
+            {showSuccessAlert ? <CustomAlert item={"Actor"} action={"created"} error={error}/> : null}
             <div>
                 <div className="button-container">
                     {showNewActorButton && <Button className="new-movie-button shadow-none" onClick={handleShowForm}>New
@@ -83,15 +83,15 @@ const CreateNewActor = ({showForm, setShowForm}) => {
                                            placeholder="Name"/>
                                 </div>
                                 <div className="mb-2 col-2">
-                                    <input className="form-control" type="text" name="name"
+                                    <input className="form-control" type="text" name="associatedPinyinSound"
                                            placeholder="Associated Pinyin Sound"/>
                                 </div>
                                 <div className="mb-2 col-2">
-                                    <input className="form-control" type="text" name="name"
+                                    <input className="form-control" type="text" name="family"
                                            placeholder="Family"/>
                                 </div>
                                 <div className="mb-2 col-2">
-                                    <input className="form-control" type="text" name="name"
+                                    <input className="form-control" type="text" name="imageUrl"
                                            placeholder="Image Url"/>
                                 </div>
                             </div>

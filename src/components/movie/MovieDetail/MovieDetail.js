@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import {useParams} from "react-router-dom";
-import {getActors, getLocations, getMovie, getRooms, updateMovie} from "../../../api";
+import {useNavigate, useParams} from "react-router-dom";
+import {deleteMovie, getActors, getLocations, getMovie, getRooms, updateMovie} from "../../../api";
 import {Button} from "react-bootstrap";
 import './MovieDetail.css'
 import DropdownSelectWithTitle from "../../DropdownSelectWithTitle";
@@ -9,14 +9,17 @@ import DropdownSelectWithName from "../../DropdownSelectWithName";
 import CustomAlert from "../../CustomAlert";
 
 const MovieDetail = () => {
-
     const {id} = useParams();
+
+    let navigate = useNavigate();
 
     const [movie, setMovie] = useState()
     const [selectedActorId, selectActorId] = useState(null);
     const [selectedLocationId, selectLocationId] = useState(null);
     const [selectedRoomId, selectRoomId] = useState(null);
     const [showSuccessAlert, setShowSuccessAlert] = useState(false)
+    const [action, setAction] = useState()
+    const [isDeleted, setIsDeleted] = useState(false)
 
     useEffect(() => {
             const timeId = setTimeout(() => {
@@ -29,6 +32,19 @@ const MovieDetail = () => {
             }
         },
         [movie]
+    );
+
+    useEffect(() => {
+            const timeId = setTimeout(() => {
+                // After 3 seconds set the show value to false
+                navigate(`/`)
+            }, 3000)
+
+            return () => {
+                clearTimeout(timeId)
+            }
+        },
+        [isDeleted]
     );
 
     useEffect(() => {
@@ -140,6 +156,25 @@ const MovieDetail = () => {
             updateMovie(axiosParams).then(response => {
                     setMovie(response.data)
                     setShowSuccessAlert(true)
+                    setAction("Updated")
+                }
+            )
+
+        } catch (e) {
+            console.log(e + "error")
+        }
+    }
+
+    const handleDelete = () => {
+        const axiosParams = {
+            id,
+        }
+
+        try {
+            deleteMovie(axiosParams).then(() => {
+                    setShowSuccessAlert(true)
+                    setAction("Deleted")
+                    setIsDeleted(true)
                 }
             )
 
@@ -152,7 +187,7 @@ const MovieDetail = () => {
         <div>
             {movie &&
             <div className="container" style={{background: "![](../../../sample_movie.jpeg)"}}>
-                {showSuccessAlert ? <CustomAlert item={"Movie"} action={"updated"} error={null}/> : null}
+                {showSuccessAlert ? <CustomAlert item={"Movie"} action={action} error={null}/> : null}
                 <div className="row" style={{marginTop: "15px"}}>
                     <div style={{textAlign: "end"}}>
                         <Button>See on Mandarin Blueprint</Button>
@@ -201,7 +236,7 @@ const MovieDetail = () => {
                             <div style={{marginTop: "16px"}}>
                                 <Button className="btn-primary" style={{marginRight: "56px"}}
                                         onClick={handleSave}>Save</Button>
-                                <Button className="btn-danger">Delete Movie</Button>
+                                <Button className="btn-danger" onClick={handleDelete}>Delete Movie</Button>
                             </div>
                         </div>
                     </div>
