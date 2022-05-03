@@ -1,8 +1,15 @@
 import React, {useEffect} from 'react';
 import {deleteCharacter} from "../../api";
 import CharacterTable from "./CharacterTable";
+import {useNavigate} from "react-router-dom";
 
 const CharacterTableContainer = ({characters, showSuccessAlert, setShowSuccessAlert}) => {
+
+    let navigate = useNavigate();
+
+    const handleClick = (id) => {
+        navigate(`../movie/${id}`)
+    }
 
     useEffect(() => {
             const timeId = setTimeout(() => {
@@ -37,6 +44,7 @@ const CharacterTableContainer = ({characters, showSuccessAlert, setShowSuccessAl
         <CharacterTable
             characters={characters}
             showSuccessAlert={showSuccessAlert}
+            handleClick={handleClick}
             handleDelete={handleDelete}/>
     )
 }
