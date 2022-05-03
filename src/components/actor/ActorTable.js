@@ -3,7 +3,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTrashCan} from "@fortawesome/free-solid-svg-icons";
 import CustomAlert from "../CustomAlert";
 
-const ActorTable = ({actors, showSuccessAlert, handleDelete}) => {
+const ActorTable = ({actors, showSuccessAlert, handleDelete, handleClick}) => {
     return (
         <div>
             {showSuccessAlert ? <CustomAlert item={"Actor"} action={"deleted"}/> : null}
@@ -20,7 +20,7 @@ const ActorTable = ({actors, showSuccessAlert, handleDelete}) => {
                     </thead>
                     {actors.length > 0 && actors.map((actor, key) => (
                         <tbody className="table-light">
-                        <tr style={{cursor: 'pointer'}}>
+                        <tr style={{cursor: 'pointer'}} onClick={() => handleClick(`${actor.id}`)}>
                             <td>{`${actor.name}`} </td>
                             <td>{`${actor.associatedPinyinSound}`} </td>
                             <td>{`${actor.family}`} </td>

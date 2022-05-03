@@ -1,11 +1,11 @@
 const axios = require('axios')
 const BASE_URL = 'http://localhost:8081';
 
-exports.getMovies = () => {
+exports.getMovies = (baseUrl = BASE_URL) => {
     return axios.request({
         method: "GET",
-        baseURL: BASE_URL,
-        url: `${BASE_URL}/api/mb/movie`,
+        baseURL: baseUrl,
+        url: `${baseUrl}/api/mb/movie`,
         headers: {Accept: "application/json"},
     })
 }
@@ -57,6 +57,15 @@ exports.getActors = () => {
         method: "GET",
         baseURL: BASE_URL,
         url: `${BASE_URL}/api/mb/actor`,
+        headers: {Accept: "application/json"},
+    })
+}
+
+exports.getActor = (id) => {
+    return axios.request({
+        method: "GET",
+        baseURL: BASE_URL,
+        url: `${BASE_URL}/api/mb/actor/${id}`,
         headers: {Accept: "application/json"},
     })
 }

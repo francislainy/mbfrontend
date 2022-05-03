@@ -88,12 +88,6 @@ const CreateNewActor = ({showForm, setShowForm}) => {
                                            placeholder="Name"/>
                                 </div>
                                 <div className="mb-2 col-2">
-                                    <input className="form-control" type="text" name="associatedPinyinSound"
-                                           placeholder="Associated Pinyin Sound"/>
-                                </div>
-                                <div className="mb-2 col-2">
-                                    {/*<input className="form-control" type="text" name="family"*/}
-                                    {/*       placeholder="Family"/>*/}
                                     <DropdownButton
                                         variant="custom" title={selectedFamily}>
                                         <Dropdown.Item onClick={handleFamilyClick}>FEMALE</Dropdown.Item>
@@ -101,6 +95,10 @@ const CreateNewActor = ({showForm, setShowForm}) => {
                                         <Dropdown.Item onClick={handleFamilyClick}>GOD</Dropdown.Item>
                                         <Dropdown.Item onClick={handleFamilyClick}>FICTIONAL</Dropdown.Item>
                                     </DropdownButton>
+                                </div>
+                                <div className="mb-2 col-2">
+                                    <input className="form-control" type="text" name="associatedPinyinSound"
+                                           placeholder="Associated Pinyin Sound"/>
                                 </div>
                                 <div className="mb-2 col-2">
                                     <input className="form-control" type="text" name="imageUrl"

@@ -37,7 +37,7 @@ const MovieDetail = () => {
     useEffect(() => {
             const timeId = setTimeout(() => {
                 // After 3 seconds set the show value to false
-                navigate(`/`)
+                // navigate(`/`)
             }, 3000)
 
             return () => {
