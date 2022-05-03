@@ -19,6 +19,16 @@ exports.getMovie = (id) => {
     })
 }
 
+exports.getMoviesForActor = (id) => {
+    return axios.request({
+        method: "GET",
+        baseURL: BASE_URL,
+        url: `${BASE_URL}/api/mb/movie/actor/${id}`,
+        headers: {Accept: "application/json"},
+    })
+}
+
+
 exports.createMovie = axiosParams => {
     const payload = axiosParams.payload
     return axios.request({

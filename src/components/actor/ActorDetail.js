@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useNavigate, useParams} from "react-router-dom";
-import {getActor} from "../../api";
+import {getMoviesForActor} from "../../api";
 import CustomAlert from "../CustomAlert";
 
 const ActorDetail = () => {
@@ -11,6 +11,31 @@ const ActorDetail = () => {
     const [actor, setActor] = useState({
         id: '',
         name: ''
+    })
+    const [movieList, setMovieList] = useState({
+        movies: [
+            {
+                id: "",
+                scene: "",
+                imageUrl: "",
+                actor: {
+                    id: "",
+                },
+                character: {
+                    hanzi: "",
+                    pinyin: "",
+                    meaning: ""
+                },
+                room: {
+                    id: "",
+                    title: ""
+                },
+                location: {
+                    id: "",
+                    title: ""
+                }
+            }
+        ]
     })
     const [showSuccessAlert, setShowSuccessAlert] = useState(false)
     const [action, setAction] = useState()
@@ -31,8 +56,8 @@ const ActorDetail = () => {
     useEffect(() => {
         const loadAll = async () => {
             try {
-                getActor(id).then(response => {
-                    setActor(response.data)
+                getMoviesForActor(id).then(response => {
+                    setMovieList(response.data)
                 })
             } catch (e) {
                 console.log(e + "error")
@@ -56,6 +81,25 @@ const ActorDetail = () => {
                                 </div>
                             </div>
                         </div>
+                        {movieList.movies.length > 0 && <div className="movieRow--listarea">
+                            <table className="table">
+                                <thead>
+                                <tr>
+                                    <th>Movie Id</th>
+                                    <th>Scene</th>
+                                </tr>
+                                </thead>
+                                {movieList.movies.length > 0 && movieList.movies.map((movie, key) => (
+                                    <tbody className="table-light">
+                                    <tr style={{cursor: 'pointer'}}>
+                                        <td>{`${movie.id}`} </td>
+                                        <td>{`${movie.scene}`} </td>
+                                    </tr>
+                                    </tbody>
+                                ))}
+                            </table>
+                        </div>
+                        }
                     </div>
                 </div>
             </div>
