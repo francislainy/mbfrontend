@@ -3,7 +3,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
-import Home from "./components/movie/Home";
+import Movie from "./components/movie/Movie";
 import MovieDetail from "./components/movie/MovieDetail/MovieDetail";
 import Navigation from "./components/Navigation";
 import Location from "./components/location/Location";
@@ -18,7 +18,7 @@ function App() {
             <Router>
                 <Navigation/>
                 <Routes>
-                    <Route path="/" exact element={<Home/>}/>
+                    <Route path="/" exact element={<Movie/>}/>
                     <Route path="/movie/:id" exact element={<MovieDetail/>}/>
                     <Route path="/characters" exact element={<Character/>}/>
                     <Route path="/actors" exact element={<Actor/>}/>

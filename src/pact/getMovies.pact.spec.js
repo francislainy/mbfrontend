@@ -53,7 +53,7 @@ describe('API Pact test', () => {
 
             await mockProvider.addInteraction({
                 state: 'movies exist',
-                uponReceiving: 'a request to get all movies',
+                uponReceiving: 'a request to retrieve a list of movies',
                 withRequest: {
                     method: 'GET',
                     path: '/api/mb/movie/',
