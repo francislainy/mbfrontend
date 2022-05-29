@@ -8,9 +8,9 @@ import FilterMovie from "./FilterMovie";
 const Movie = () => {
     const [showForm, setShowForm] = useState(false)
     const [showFilter, setShowFilter] = useState(false)
-    const [filteredData, setFilteredData] = useState({
-        scene: "dabom"
-    })
+    const [filteredQuery, setFilteredQuery] = useState(
+        ""
+    )
     const [showSuccessAlert, setShowSuccessAlert] = useState(false)
     const [movieList, setMovieList] = useState({
         movies: [
@@ -37,30 +37,20 @@ const Movie = () => {
         ]
     })
 
-    // useEffect(() => {
-    //     const loadAll = async () => {
-    //         try {
-    //             getMovies().then(response => setMovieList(response.data))
-    //         } catch (e) {
-    //             console.log(e + "error")
-    //         }
-    //     }
-    //
-    //     loadAll().then(r => console.log(r));
-    // }, [showForm, showSuccessAlert]);
-
     useEffect(() => {
         const loadAll = async () => {
             try {
-                console.log(filteredData)
-                getFilteredMovies(filteredData).then(response => setMovieList(response.data))
+                console.log(filteredQuery)
+                getFilteredMovies(filteredQuery).then(response => setMovieList(response.data))
             } catch (e) {
                 console.log(e + "error")
             }
         }
 
-        loadAll().then(r => console.log(r));
-    }, [showForm, showFilter, filteredData, showSuccessAlert]);
+        loadAll().then(
+            r => console.log(r)
+        );
+    }, [showForm, showFilter, filteredQuery, showSuccessAlert]);
 
     return (
         <div className="container">
@@ -73,8 +63,8 @@ const Movie = () => {
             <FilterMovie
                 movieList={movieList}
                 setMovieList={setMovieList}
-                filteredData={filteredData}
-                setFilteredData={setFilteredData}
+                filteredData={filteredQuery}
+                setFilteredQuery={setFilteredQuery}
                 setShowFilter={setShowFilter}
                 showFilter={showFilter}
             />

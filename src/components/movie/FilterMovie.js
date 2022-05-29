@@ -4,7 +4,7 @@ import {Button} from "react-bootstrap";
 import CustomAlert from "../CustomAlert";
 import FilterMovieForm from "./FilterMovieForm";
 
-const FilterMovie = ({showFilter, setShowFilter, filteredData, setFilteredData}) => {
+const FilterMovie = ({showFilter, setShowFilter, filteredQuery, setFilteredQuery}) => {
     const [showFilterButton, setShowFilterButton] = useState(true)
     const [showSuccessAlert, setShowSuccessAlert] = useState(false)
     const [selectedActorId, selectActorId] = useState(null);
@@ -26,6 +26,7 @@ const FilterMovie = ({showFilter, setShowFilter, filteredData, setFilteredData})
     );
 
     function handleSubmit(e) {
+        // const {scene} = e.target
         // const {character, pinyin} = e.target
         // let values = {
         //     character: {
@@ -42,12 +43,19 @@ const FilterMovie = ({showFilter, setShowFilter, filteredData, setFilteredData})
         //         id: selectedRoomId,
         //     }
         // }
+        //
+        // let values = {
+        //     actor: {
+        //         id: selectedActorId,
+        //     },
+        //     scene: 'dabom'
+        // }
 
         let values = {
-            scene: "dabom"
+            query: 'scene=dabom'
         }
 
-        setFilteredData(values)
+        setFilteredQuery(values)
     }
 
     const handleShowFilter = () => {
@@ -71,7 +79,7 @@ const FilterMovie = ({showFilter, setShowFilter, filteredData, setFilteredData})
                 </div>
                 {
                     showFilter ? <section style={{paddingBottom: '16px'}}>
-                        <form method="post" onSubmit={handleSubmit}>
+                        <form onSubmit={handleSubmit}>
                             <div className="close-form-container">
                                 <Button className="new-movie-button shadow-none"
                                         onClick={handleHideFilter}>X</Button>

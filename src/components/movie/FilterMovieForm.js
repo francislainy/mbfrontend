@@ -87,6 +87,9 @@ const FilterMovieForm = ({
                     <div className="mb-2 col-2">
                         <input className="form-control" type="text" name="pinyin" placeholder="Pinyin"/>
                     </div>
+                    <div className="mb-2 col-2">
+                        <input className="form-control" type="text" name="scene" placeholder="Scene"/>
+                    </div>
                 </div>
                 <div className="row">
                     <div className="mb-2 col-4">

@@ -11,12 +11,12 @@ exports.getMovies = (baseUrl = BASE_URL) => {
 }
 
 exports.getFilteredMovies = axiosParams => {
-    console.log(axiosParams.scene)
+    console.log(axiosParams.query)
 
     return axios.request({
         method: "GET",
         baseURL: BASE_URL,
-        url: `${BASE_URL}/api/mb/movie/filter/custom?scene=${axiosParams.scene}`,
+        url: `${BASE_URL}/api/mb/movie/filter/custom?${axiosParams.query}`,
         headers: {Accept: "application/json"},
     })
 }
@@ -38,7 +38,6 @@ exports.getMoviesForActor = (id) => {
         headers: {Accept: "application/json"},
     })
 }
-
 
 exports.createMovie = axiosParams => {
     const payload = axiosParams.payload
