@@ -26,7 +26,10 @@ const FilterMovie = ({showFilter, setShowFilter, filteredQuery, setFilteredQuery
     );
 
     function handleSubmit(e) {
-        // const {scene} = e.target
+        e.preventDefault()
+
+        const {scene} = e.target
+
         // const {character, pinyin} = e.target
         // let values = {
         //     character: {
@@ -52,7 +55,8 @@ const FilterMovie = ({showFilter, setShowFilter, filteredQuery, setFilteredQuery
         // }
 
         let values = {
-            query: 'scene=dabom'
+            // query: 'scene=dabom'
+            query: `scene=${scene.value}`
         }
 
         setFilteredQuery(values)
