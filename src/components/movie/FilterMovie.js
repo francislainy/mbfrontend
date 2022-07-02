@@ -28,35 +28,34 @@ const FilterMovie = ({showFilter, setShowFilter, filteredQuery, setFilteredQuery
     function handleSubmit(e) {
         e.preventDefault()
 
-        const {scene} = e.target
+        const {scene, hanzi, pinyin} = e.target
+      
+        let query = "";
 
-        // const {character, pinyin} = e.target
-        // let values = {
-        //     character: {
-        //         hanzi: character.value,
-        //         pinyin: pinyin.value,
-        //     },
-        //     actor: {
-        //         id: selectedActorId,
-        //     },
-        //     location: {
-        //         id: selectedLocationId,
-        //     },
-        //     room: {
-        //         id: selectedRoomId,
-        //     }
-        // }
-        //
-        // let values = {
-        //     actor: {
-        //         id: selectedActorId,
-        //     },
-        //     scene: 'dabom'
-        // }
+        if (hanzi.value !== undefined && hanzi.value !== "" && hanzi.value !== null) {
+            query += `hanzi=${hanzi.value}`;
+        }
+        if (pinyin.value !== undefined && pinyin.value !== "" && pinyin.value !== null) {
+            query += `pinyin=${pinyin.value}`;
+        }
+        if (scene.value !== undefined && scene.value !== "" && scene.value !== null) {
+            query += `scene=${scene.value}`;
+        }
+        if (scene.value !== undefined && scene.value !== "" && scene.value !== null) {
+            query += `scene=${scene.value}`;
+        }
+        if (selectedActorId !== undefined && selectedActorId !== null) {
+            query += `&actorId=${selectedActorId}`;
+        }
+        if (selectedLocationId !== undefined && selectedLocationId !== null) {
+            query += `&locationId=${selectedLocationId}`;
+        }
+        if (selectedRoomId !== undefined && selectedRoomId !== null) {
+            query += `&roomId=${selectedRoomId}`;
+        }
 
         let values = {
-            // query: 'scene=dabom'
-            query: `scene=${scene.value}`
+            query,
         }
 
         setFilteredQuery(values)
