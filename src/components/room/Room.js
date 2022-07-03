@@ -11,6 +11,7 @@ const Room = () => {
             {
                 id: "",
                 title: "",
+                tone: ""
             }
         ]
     })

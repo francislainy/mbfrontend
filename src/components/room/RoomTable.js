@@ -12,7 +12,7 @@ const RoomTable = ({rooms, showSuccessAlert, handleDelete}) => {
                     <thead>
                     <tr>
                         <th>Title</th>
-                        <th>Associated Pinyin Sound</th>
+                        <th>Tone</th>
                         <th>Delete room</th>
                     </tr>
                     </thead>
@@ -20,7 +20,7 @@ const RoomTable = ({rooms, showSuccessAlert, handleDelete}) => {
                         <tbody className="table-light">
                         <tr style={{cursor: 'pointer'}}>
                             <td>{`${room.title}`} </td>
-                            <td>{`${room.associatedPinyinSound}`} </td>
+                            <td>{`${room.tone}`} </td>
                             <td><FontAwesomeIcon icon={faTrashCan} onClick={(e) => handleDelete(e, `${room.id}`)}/>
                             </td>
                         </tr>
