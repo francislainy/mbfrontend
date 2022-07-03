@@ -8,6 +8,10 @@ const ActorDetail = () => {
 
     let navigate = useNavigate();
 
+    const handleClick = (movieId) => {
+        navigate(`../movie/${movieId}`)
+    }
+
     const [actor, setActor] = useState({
         id: '',
         name: ''
@@ -93,8 +97,8 @@ const ActorDetail = () => {
                                 </thead>
                                 {movieList.movies.length > 0 && movieList.movies.map((movie, key) => (
                                     <tbody className="table-light">
-                                    <tr style={{cursor: 'pointer'}}>
-                                        <td>{`${movie.id}`} </td>
+                                    <tr>
+                                        <td style={{cursor: 'pointer'}} onClick={() => handleClick(movie.id)}>{`${movie.id}`} </td>
                                         <td>{`${movie.character.hanzi}`} </td>
                                         <td>{`${movie.character.pinyin}`} </td>
                                         <td>{`${movie.scene}`} </td>
