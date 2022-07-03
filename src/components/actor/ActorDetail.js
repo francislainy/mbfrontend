@@ -86,6 +86,8 @@ const ActorDetail = () => {
                                 <thead>
                                 <tr>
                                     <th>Movie Id</th>
+                                    <th>Hanzi</th>
+                                    <th>Pinyin</th>
                                     <th>Scene</th>
                                 </tr>
                                 </thead>
@@ -93,6 +95,8 @@ const ActorDetail = () => {
                                     <tbody className="table-light">
                                     <tr style={{cursor: 'pointer'}}>
                                         <td>{`${movie.id}`} </td>
+                                        <td>{`${movie.character.hanzi}`} </td>
+                                        <td>{`${movie.character.pinyin}`} </td>
                                         <td>{`${movie.scene}`} </td>
                                     </tr>
                                     </tbody>
