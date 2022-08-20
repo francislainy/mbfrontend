@@ -25,10 +25,11 @@ const CreateNewCharacter = ({showForm, setShowForm}) => {
 
     function handleSubmit(e) {
         e.preventDefault()
-        const {hanzi, pinyin, meaning} = e.target
+        const {hanzi, pinyin, tone, meaning} = e.target
         let values = {
             hanzi: hanzi.value,
             pinyin: pinyin.value,
+            tone: tone.value,
             meaning: meaning.value
         }
 
@@ -86,6 +87,10 @@ const CreateNewCharacter = ({showForm, setShowForm}) => {
                                 <div className="mb-2 col-2">
                                     <input className="form-control" type="text" name="pinyin"
                                            placeholder="Pinyin"/>
+                                </div>
+                                <div className="mb-2 col-2">
+                                    <input className="form-control" type="text" name="tone"
+                                           placeholder="Tone"/>
                                 </div>
                                 <div className="mb-2 col-2">
                                     <input className="form-control" type="text" name="meaning"
