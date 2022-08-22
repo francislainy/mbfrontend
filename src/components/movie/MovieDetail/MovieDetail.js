@@ -53,7 +53,7 @@ const MovieDetail = () => {
                 getMovie(id).then(response => {
                     setMovie(response.data)
                     selectActorId(response.data.actor.id)
-                    selectLocationId(response.data.location.id)
+                    selectLocationId(response.data.location !== null ? response.data.location.id : null)
                     selectRoomId(response.data.room.id)
                 })
             } catch (e) {
